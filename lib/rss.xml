@@ -1,0 +1,2766 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[SQL SERVER]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib\media\favicon.png</url><title>SQL SERVER</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 23 Dec 2024 16:27:50 GMT</lastBuildDate><atom:link href="lib\rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 23 Dec 2024 16:27:38 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[1. DQL and Select]]></title><description><![CDATA[ 
+ <br>Let's explore Data Query Language (DQL) for working with databases. <br>What is DQL (Data Query Language)?<br>DQL is a subset of SQL (Structured Query Language) specifically designed for retrieving data from a database. It allows you to specify the exact data you need in a structured and readable format.<br>Key DQL Statement: SELECT<br>The SELECT statement is the heart of DQL. Here's its basic syntax:<br>SELECT column1, column2, ...
+FROM table_name
+WHERE condition; 
+<br>
+<br>SELECT:  Specifies the columns you want to retrieve data from. Use * to select all columns.
+<br>FROM:  Indicates the table where the data resides.
+<br>WHERE: (Optional) Filters the results based on a specified condition.
+<br>Examples<br>Let's assume we have a table named "Customers" with columns like CustomerID, FirstName, LastName, City, and Country.<br>
+<br>
+Selecting All Columns and Rows:
+SELECT * 
+FROM Customers; 
+
+This query retrieves all data from the "Customers" table.
+
+<br>
+Selecting Specific Columns:
+SELECT FirstName, LastName, City
+FROM Customers;
+
+This query retrieves only the FirstName, LastName, and City columns from the "Customers" table.
+
+<br>
+Filtering Data with WHERE:
+SELECT *
+FROM Customers
+WHERE Country = 'USA';
+
+This query retrieves all data for customers located in the 'USA'.
+
+<br>Common WHERE Clause Operators<br>
+<br>=: Equal to
+<br>&lt;&gt;: Not equal to
+<br>&gt;: Greater than
+<br>&lt;: Less than
+<br>&gt;=: Greater than or equal to
+<br>&lt;=: Less than or equal to
+<br>BETWEEN: Within a range of values
+<br>LIKE: Matches a pattern 
+<br>IN: Checks for values in a list
+<br>Example using LIKE:<br>SELECT *
+FROM Customers
+WHERE FirstName LIKE 'A%'; 
+<br>This query retrieves customers whose FirstName starts with the letter 'A'.<br>Important Notes:<br>
+<br>Case Sensitivity: SQL keywords are generally not case-sensitive, but column names and data can be depending on your database system's configuration. 
+<br>SQL Dialects: While the core concepts of DQL are consistent, specific syntax and features might differ slightly between database management systems (DBMS) like MySQL, PostgreSQL, SQL Server, and Oracle.
+<br>Beyond the Basics<br>DQL goes far beyond these fundamentals:<br>
+<br>Sorting Results: ORDER BY clause to sort the retrieved data.
+<br>Limiting Results: LIMIT or TOP clause to restrict the number of rows returned.
+<br>Aggregate Functions: Functions like COUNT, SUM, AVG, MIN, and MAX to perform calculations on data.
+<br>Joining Tables: JOIN clause to combine data from multiple tables.
+<br>Subqueries: Nested queries to refine data retrieval even further.
+<br><br>You got it! Here is the Products table with 10 sample rows:<br>Products Table<br><br>Let's practice INSERT and SELECT statements in SQL Server with some example questions and a sample table.<br> Table: Products<br><br>INSERT Questions<br>
+<br>Add a new product named "Wireless Headphones" to the "Electronics" category, priced at $79.99, with 100 units in stock.
+<br>Insert a new product with only the ProductName and Category provided: "Coffee Beans" in the "Grocery" category. Assume the database will handle default values for Price and QuantityInStock.
+<br>Add a new product, "Laptop Stand," to the "Accessories" category. Set the price to $24.99.  Determine the correct SQL statement without specifying the ProductID (it should auto-increment).
+<br>A new shipment has arrived!  Increase the QuantityInStock for the product with ProductID = 5 by 50 units.  (Hint: You'll need an UPDATE statement, which is closely related to INSERT). 
+<br>Try to insert a duplicate product named "Wireless Headphones" in the "Electronics" category. What happens? (This helps you understand primary keys and constraints.)
+<br>SELECT Questions<br>
+<br>Retrieve all products in the "Electronics" category.
+<br>List the names and prices of all products with a price greater than $50, ordered from most expensive to least expensive.
+<br>Find the average price of products in the "Grocery" category.
+<br>How many different product categories are there in the table?
+<br>Retrieve the product with the highest price. Display its ProductName, Category, and Price.
+<br>Important: I've intentionally left out the SQL answers to these questions. Try writing the SQL statements yourself to test your understanding. I'm here to help you check your answers and provide explanations if you get stuck! <br>Let me know if you have any questions or if you'd like me to clarify anything. ]]></description><link>SQL-SERVER\1. DQL\1. DQL and Select.html</link><guid isPermaLink="false">SQL-SERVER/1. DQL/1. DQL and Select.md</guid><pubDate>Sat, 10 Aug 2024 03:51:25 GMT</pubDate></item><item><title><![CDATA[2. Order By Clause]]></title><description><![CDATA[ 
+ <br>You've got it! The ORDER BY clause is essential in SQL for sorting your query results. Here's a breakdown of its usage:<br>Syntax:<br>SELECT column1, column2, ...
+FROM table_name
+WHERE condition
+ORDER BY column1 [ASC | DESC], column2 [ASC | DESC], ...;
+<br>
+<br>ORDER BY: This keyword signals that you want to sort the results.
+<br>column1, column2, ...: Specify the column(s) you want to sort by. You can order by multiple columns.
+<br>ASC: (Optional) Sorts the specified column in ascending order (default behavior).
+<br>DESC: Sorts the specified column in descending order.
+<br>How it works:<br>
+<br>Data Retrieval: The database engine first retrieves the data that matches your SELECT and WHERE clauses (if any).
+<br>Sorting:  It then sorts the retrieved rows based on the column(s) specified in the ORDER BY clause.
+<br>Result Presentation: The sorted result set is returned to you.
+<br>Examples:<br>Let's assume a table called "Employees" with columns: EmployeeID, LastName, FirstName, Salary, and Department.<br>
+<br>
+Sort by Last Name (ascending):
+SELECT EmployeeID, LastName, FirstName
+FROM Employees
+ORDER BY LastName ASC;  -- 'ASC' is optional here, as it's the default
+
+This query retrieves employee information sorted alphabetically by last name.
+
+<br>
+Sort by Department and then Salary (descending):
+SELECT LastName, FirstName, Department, Salary
+FROM Employees
+ORDER BY Department ASC, Salary DESC;
+
+This retrieves employees sorted by department in ascending order, and within each department, by salary in descending order (highest salaries first).
+
+<br>
+Sort by an Expression:
+SELECT FirstName, LastName, YEAR(HireDate) AS HireYear
+FROM Employees
+ORDER BY HireYear DESC;
+
+This calculates the hire year and then sorts employees based on that calculated value.
+
+<br>Important Points:<br>
+<br>Default Sorting: If you don't use an ORDER BY clause, the database system returns the data in an arbitrary order, which may not be consistent between queries.
+<br>NULL Values: The handling of NULL values during sorting can differ between database systems. Typically, NULL values are placed either at the beginning or the end of the sorted result set.
+<br>Performance: Sorting large datasets can be resource-intensive. Consider using indexes on columns frequently used in ORDER BY clauses to optimize query performance.
+<br><br>Here are 5 questions to practice the ORDER BY clause, along with a sample table and its structure:<br>Table: Orders<br><br>Sample Data:<br><br>ORDER BY Questions<br>
+<br>Retrieve all orders sorted by OrderDate from the earliest to the most recent.
+<br>List the OrderID, CustomerID, and TotalAmount of the top 3 orders with the highest TotalAmount.
+<br>Display all orders made by CustomerID 101, ordered chronologically by OrderDate.
+<br>Find the orders that are currently in the 'Processing' status, sorted alphabetically by Status and then by TotalAmount (highest to lowest).
+<br>Retrieve the OrderID, OrderDate, and TotalAmount of all orders, sorted by the month of the OrderDate in ascending order (January to December). (Hint: You might need to use the MONTH() function in your ORDER BY clause).
+<br>Remember that you can use ASC for ascending order (default) and DESC for descending order. ]]></description><link>SQL-SERVER\1. DQL\2. Order By Clause.html</link><guid isPermaLink="false">SQL-SERVER/1. DQL/2. Order By Clause.md</guid><pubDate>Sun, 07 Jul 2024 16:57:58 GMT</pubDate></item><item><title><![CDATA[3. WHERE Clause Basics]]></title><description><![CDATA[ 
+ <br>*Purpose: The WHERE clause acts as a filter for your SQL SELECT statements. It specifies conditions that rows must meet to be included in the result set.<br>
+<br>
+Syntax:
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition; 
+
+
+<br>
+Importance: Essential for extracting specific, meaningful data subsets from potentially large tables.
+
+<br>Common Operators<br>
+<br>
+Comparison Operators:
+
+<br>= (Equal to):
+SELECT * FROM products WHERE category = 'Electronics';
+
+
+<br>&lt;&gt; or != (Not equal to):
+SELECT * FROM orders WHERE status &lt;&gt; 'Completed';
+
+
+<br>&gt; (Greater than):
+SELECT * FROM employees WHERE salary &gt; 50000;
+
+
+<br>&lt; (Less than):
+SELECT * FROM customers WHERE age &lt; 30;
+
+
+<br>&gt;= (Greater than or equal to):
+SELECT * FROM products WHERE price &gt;= 100;
+
+
+<br>&lt;= (Less than or equal to):
+SELECT * FROM orders WHERE order_date &lt;= '2024-03-15'; 
+
+
+
+
+<br>
+Logical Operators:  Combine multiple conditions.
+
+<br>AND (Both conditions must be true):
+SELECT * FROM products WHERE category = 'Electronics' AND price &lt; 500;
+
+
+<br>OR (At least one condition must be true):
+SELECT * FROM customers WHERE country = 'USA' OR country = 'Canada';
+
+
+<br>NOT (Reverses the truth value of a condition):
+SELECT * FROM orders WHERE NOT status = 'Shipped'; 
+
+
+
+
+<br>
+BETWEEN Operator:  Checks if a value falls within a range.
+SELECT * FROM employees WHERE hire_date BETWEEN '2022-01-01' AND '2023-12-31';
+
+
+<br>
+LIKE Operator (Pattern Matching):
+
+<br>% (Matches any sequence of characters):
+SELECT * FROM customers WHERE last_name LIKE 'S%'; -- Starts with 'S'
+
+
+<br>_ (Matches any single character):
+SELECT * FROM products WHERE product_name LIKE 'Keyb_ard'; -- Matches 'Keyboard', 'Keybaard', etc.
+
+
+
+
+<br>
+IN Operator: Checks for a value within a specified set.
+SELECT * FROM orders WHERE status IN ('Processing', 'Shipped');
+
+
+<br>Important Notes:<br>
+<br>Case Sensitivity: String comparisons in SQL can be case-sensitive or case-insensitive depending on your database system and its configuration. Be mindful of this, especially with the LIKE operator.
+<br>Data Types: Ensure that you are using the correct data types for your comparisons (e.g., using quotes around date and string values).
+<br>Parentheses for Clarity: When using multiple logical operators, parentheses are crucial to control the order of evaluation and prevent ambiguity.
+<br>Example: Combining Operators<br>-- Find customers who live in the USA,
+-- are older than 25, 
+-- and have a first name that starts with 'A'.
+SELECT *
+FROM customers
+WHERE country = 'USA' 
+  AND age &gt; 25
+  AND first_name LIKE 'A%'; 
+<br><br>Let’s get this done. Here are 5 questions to practice using the WHERE clause in SQL, along with a sample table:<br>Table: Customers<br><br>Sample Data:<br><br>WHERE Clause Questions<br>
+<br>Retrieve all customers who live in the 'USA'.
+<br>Find the customers who registered between January 1st, 2023, and June 30th, 2023.
+<br>List the customers whose last name starts with the letter 'B'.
+<br>Retrieve the email addresses of customers who live in either 'UK' or 'Canada'.
+<br>Find the customers who registered before 2023 and have an email address containing '.org'.
+<br>Remember: <br>
+<br>Use comparison operators (=, &lt;&gt;, &gt;, &lt;, &gt;=, &lt;=)
+<br>Use BETWEEN for range checks
+<br>Use LIKE with wildcard characters (%, _) for pattern matching
+<br>Use IN to check for values within a set
+<br>Combine conditions with AND, OR, and NOT
+<br>Try writing the SQL queries yourself to test your understanding. I'm happy to help you check your answers! ]]></description><link>SQL-SERVER\1. DQL\3. WHERE Clause Basics.html</link><guid isPermaLink="false">SQL-SERVER/1. DQL/3. WHERE Clause Basics.md</guid><pubDate>Sat, 10 Aug 2024 05:20:46 GMT</pubDate></item><item><title><![CDATA[4. Usage of Top, Distinct, Null keywords]]></title><description><![CDATA[ 
+ <br>1. TOP<br>
+<br>
+Purpose: Limits the number of rows returned by a query.
+
+<br>
+Syntax: 
+    SELECT TOP (number) | TOP (percent) PERCENT [WITH TIES] columns
+FROM table_name
+WHERE condition
+ORDER BY column [ASC|DESC];
+
+
+<br>
+Key Points:
+
+<br>Often requires an ORDER BY clause to make sense of which rows are considered "top."
+<br>WITH TIES includes rows that have the same value as the last row in the limited result set.
+
+
+<br>
+Example:
+-- Get the top 3 highest-paid employees:
+SELECT TOP (3) employee_name, salary
+FROM employees
+ORDER BY salary DESC; 
+
+
+<br>2. DISTINCT<br>
+<br>Purpose: Eliminates duplicate rows from the result set, returning only unique values for the specified column(s).
+<br>Syntax:
+SELECT DISTINCT column1, column2, ...
+FROM table_name;
+
+
+<br>Example:
+-- Get a list of unique departments in the company:
+SELECT DISTINCT department 
+FROM employees;
+
+
+<br>3. NULL<br>
+<br>Purpose: Represents the absence of a value in a column. It's not the same as zero or an empty string.
+<br>Checking for NULL:
+
+<br>Use IS NULL or IS NOT NULL instead of the equality operator (=) when checking for NULL values.
+
+
+<br>Example:
+-- Find customers who haven't provided a phone number:
+SELECT *
+FROM customers
+WHERE phone_number IS NULL;
+
+
+]]></description><link>SQL-SERVER\1. DQL\4. Usage of Top, Distinct, Null keywords.html</link><guid isPermaLink="false">SQL-SERVER/1. DQL/4. Usage of Top, Distinct, Null keywords.md</guid><pubDate>Tue, 13 Aug 2024 04:19:32 GMT</pubDate></item><item><title><![CDATA[5. Using String and Arithmetic Expressions]]></title><description><![CDATA[ 
+ <br>Let's explore how to use string and arithmetic expressions to manipulate and derive information from your SQL Server data.<br>1. String Expressions<br>String expressions let you work with text-based data.<br>
+<br>
+Concatenation:
+
+<br>
+The + operator combines two or more strings.
+SELECT first_name + ' ' + last_name AS full_name
+FROM employees;
+
+
+<br>
+CONCAT() function (SQL Server 2012 and later): A more versatile option, handling NULL values automatically.
+SELECT CONCAT(first_name, ' ', last_name) AS full_name
+FROM employees;
+
+
+
+
+<br>
+Changing Case:
+
+<br>UPPER(): Converts to uppercase.
+SELECT UPPER(product_name) AS product_name_upper
+FROM products;
+
+
+<br>LOWER(): Converts to lowercase.
+SELECT LOWER(email) AS email_lower
+FROM customers;
+
+
+
+
+<br>
+Substrings:
+
+<br>SUBSTRING(string, start, length): Extracts a portion of a string.
+SELECT SUBSTRING(description, 1, 10) AS short_description
+FROM products; 
+
+
+
+
+<br>
+Length:
+
+<br>LEN(string): Returns the number of characters in a string.
+SELECT product_name, LEN(product_name) AS name_length
+FROM products;
+
+
+
+
+<br>
+Trimming:
+
+<br>LTRIM(string): Removes leading spaces.
+<br>RTRIM(string): Removes trailing spaces.
+<br>TRIM(string) (SQL Server 2017 and later): Removes leading and trailing spaces. 
+
+
+<br>2. Arithmetic Expressions<br>Perform calculations on numerical data.<br>
+<br>
+Basic Operators:
+
+<br>+ (Addition)
+<br>- (Subtraction)
+<br>* (Multiplication)
+<br>/ (Division)
+<br>% (Modulo - returns the remainder of a division)
+
+
+<br>
+Example:
+SELECT 
+    product_name,
+    price, 
+    quantity, 
+    price * quantity AS total_value,
+    (price * 0.10) AS discount_amount -- 10% discount
+FROM order_items;
+
+
+<br>Combining String and Arithmetic Expressions<br>You can combine string and arithmetic expressions to create powerful calculations:<br>SELECT 
+    first_name,
+    last_name,
+    salary,
+    'Employee ' + first_name + ' ' + last_name + ' earns $' + CAST(salary AS VARCHAR) + ' per year.' AS employee_info
+FROM 
+    employees; 
+<br>Key Points:<br>
+<br>Data Type Compatibility: Be mindful of data types. If needed, use functions like CAST() or CONVERT() to convert data types for compatibility in expressions.
+<br>Operator Precedence: SQL follows standard mathematical operator precedence (multiplication and division before addition and subtraction). Use parentheses to control the order of operations.
+<br>NULL Values: Arithmetic operations involving NULL values generally result in NULL. Use functions like ISNULL() or COALESCE() to handle NULLs.
+]]></description><link>SQL-SERVER\1. DQL\5. Using String and Arithmetic Expressions.html</link><guid isPermaLink="false">SQL-SERVER/1. DQL/5. Using String and Arithmetic Expressions.md</guid><pubDate>Sun, 07 Jul 2024 10:17:39 GMT</pubDate></item><item><title><![CDATA[6. Working with basic of Sub Queries]]></title><description><![CDATA[ 
+ <br>Let's dive into the basics of subqueries in SQL Server to enhance your data retrieval skills!<br>What is a Subquery?<br>A subquery (also known as an inner query or nested query) is a query embedded within another SQL query (the outer query).  They allow you to break down complex tasks into smaller, more manageable parts, making your SQL code more readable and efficient.<br>Types of Subqueries<br>
+<br>
+Scalar Subqueries:  Return a single value. The outer query can use this value directly.
+SELECT 
+    product_name, 
+    price,
+    (SELECT AVG(price) FROM products) AS average_price  -- Scalar subquery
+FROM 
+    products;
+
+
+<br>
+Row Subqueries: Return a single row with one or more columns. Often used with comparison operators.
+SELECT 
+    order_id,
+    customer_id,
+    order_date
+FROM 
+    orders
+WHERE 
+    customer_id = (SELECT customer_id FROM customers WHERE last_name = 'Smith');
+
+
+<br>
+Table Subqueries: Return a result set (multiple rows and columns), acting as a temporary table within the outer query. Used with IN, NOT IN, ANY, ALL, or EXISTS.
+-- Find products with prices higher than the average price in a specific category ('Electronics'):
+SELECT 
+    product_name,
+    price
+FROM 
+    products
+WHERE 
+    price &gt; (SELECT AVG(price) FROM products WHERE category = 'Electronics');
+
+
+<br>Key Points<br>
+<br>Parentheses: Subqueries are always enclosed in parentheses ().
+<br>Evaluation Order: SQL Server generally executes the innermost subquery first and then moves outward, using the result of the inner query for the outer one. 
+<br>Correlation:  In some cases (like our table subquery example above), the inner query depends on a value from the outer query. This is called a correlated subquery.
+<br>Performance: Subqueries can sometimes impact performance, especially with large datasets. Consider using joins or other techniques if you encounter performance issues. However, in many cases, they are quite efficient and can make your code much cleaner.
+<br>Example: Finding Customers Who Placed Orders<br>Let's say you have two tables: Customers and Orders.  Here's how to use a subquery to find customers who have placed orders:<br>SELECT
+    customer_id,
+    first_name,
+    last_name
+FROM 
+    Customers
+WHERE 
+    customer_id IN (SELECT DISTINCT customer_id FROM Orders); 
+<br>Explanation:<br>
+<br>Inner Query: (SELECT DISTINCT customer_id FROM Orders) - This subquery retrieves a list of unique customer IDs from the Orders table.
+<br>Outer Query: The outer query selects customer information from the Customers table, but only for those customers whose customer_id exists in the list returned by the inner query (using the IN operator). 
+]]></description><link>SQL-SERVER\1. DQL\6. Working with basic of Sub Queries.html</link><guid isPermaLink="false">SQL-SERVER/1. DQL/6. Working with basic of Sub Queries.md</guid><pubDate>Thu, 15 Aug 2024 03:50:09 GMT</pubDate></item><item><title><![CDATA[DQL]]></title><description><![CDATA[ 
+ <br><a data-href="1. DQL and Select" href="SQL-SERVER\1. DQL\1. DQL and Select.html" class="internal-link" target="_self" rel="noopener nofollow">1. DQL and Select</a><br>
+<a data-href="2. Order By Clause" href="SQL-SERVER\1. DQL\2. Order By Clause.html" class="internal-link" target="_self" rel="noopener nofollow">2. Order By Clause</a><br>
+<a data-href="3. WHERE Clause Basics" href="SQL-SERVER\1. DQL\3. WHERE Clause Basics.html" class="internal-link" target="_self" rel="noopener nofollow">3. WHERE Clause Basics</a><br>
+<a data-href="4. Usage of Top, Distinct, Null keywords" href="SQL-SERVER\1. DQL\4. Usage of Top, Distinct, Null keywords.html" class="internal-link" target="_self" rel="noopener nofollow">4. Usage of Top, Distinct, Null keywords</a><br>
+<a data-href="5. Using String and Arithmetic Expressions" href="SQL-SERVER\1. DQL\5. Using String and Arithmetic Expressions.html" class="internal-link" target="_self" rel="noopener nofollow">5. Using String and Arithmetic Expressions</a><br>
+<a data-href="6. Working with basic of Sub Queries" href="SQL-SERVER\1. DQL\6. Working with basic of Sub Queries.html" class="internal-link" target="_self" rel="noopener nofollow">6. Working with basic of Sub Queries</a>]]></description><link>SQL-SERVER\1. DQL\DQL.html</link><guid isPermaLink="false">SQL-SERVER/1. DQL/DQL.md</guid><pubDate>Sat, 05 Oct 2024 10:35:32 GMT</pubDate></item><item><title><![CDATA[1. INTRODUCTION]]></title><description><![CDATA[ 
+ <br><br>SQL Server provides a rich set of built-in functions that you can use in queries to manipulate data. These functions can be categorized into:<br>
+<br>Scalar functions:  Return a single value for each row processed.
+<br>Aggregate functions:  Perform a calculation on a set of values and return a single value.
+<br>Table-valued functions: Return a table data type.
+<br><br>Scalar functions operate on a single input and return a single output.  Here are some common scalar functions:<br>1. String Functions:<br>
+<br>LEN(string): Returns the length of a string.
+<br>UPPER(string): Converts a string to uppercase.
+<br>LOWER(string): Converts a string to lowercase.
+<br>SUBSTRING(string, start, length): Extracts a substring from a string.
+<br>REPLACE(string, old_string, new_string): Replaces all occurrences of a specified string with another string.
+<br>Example:<br>SELECT FirstName, LastName, LEN(FirstName) AS NameLength
+FROM Customers;
+<br>*2. Date and Time Functions:
+
+
+* `GETDATE()`: Returns the current date and time.
+* `DATEADD(datepart, number, date)`: Adds a specified number of units to a date.
+* `DATEDIFF(datepart, startdate, enddate)`: Calculates the difference between two dates.
+* `DATEPART(datepart, date)`: Returns a specific part of a date.
+<br>Example:<br>SELECT DATEDIFF(day, '2024-01-01', '2024-08-16') AS DifferenceInDays;
+<br>SELECT OrderID, OrderDate, DATEADD(day, 7, OrderDate) AS DueDate
+FROM Orders;
+<br>3. Mathematical Functions:<br>
+<br>ABS(number): Returns the absolute value of a number.
+<br>ROUND(number, decimals): Rounds a number to a specified number of decimal places.
+<br>CEILING(number): Returns the smallest integer greater than or equal to a number.
+<br>FLOOR(number): Returns the largest integer less than or equal to a number.
+<br>Example:<br>SELECT ProductID, Price, ROUND(Price * 1.07, 2) AS PriceWithTax
+FROM Products;
+<br><br>Aggregate functions operate on a set of values and return a single summarized value. Some common aggregate functions:<br>
+<br>COUNT(*): Counts the number of rows.
+<br>SUM(expression): Calculates the sum of values in a column.
+<br>AVG(expression): Calculates the average value of a column.
+<br>MIN(expression): Finds the minimum value in a column.
+<br>MAX(expression): Finds the maximum value in a column.
+<br>Example:<br>SELECT COUNT(*) AS TotalCustomers, AVG(Age) AS AverageAge
+FROM Customers;
+<br>Note: Aggregate functions are often used with the GROUP BY clause to group rows based on a specific column.<br><br>Table-valued functions return a table data type that can be used in the FROM clause of a query.<br>Example:<br>CREATE FUNCTION GetCustomersByCity (@City varchar(50))
+RETURNS TABLE
+AS
+RETURN (
+    SELECT *
+    FROM Customers
+    WHERE City = @City
+);
+
+-- Using the table-valued function in a query
+SELECT *
+FROM GetCustomersByCity('London');
+<br>This is a basic overview of using functions in SQL Server queries. You can find more information about specific functions in the Microsoft SQL Server documentation. ]]></description><link>SQL-SERVER\2. FUNCTIONS\1. INTRODUCTION.html</link><guid isPermaLink="false">SQL-SERVER/2. FUNCTIONS/1. INTRODUCTION.md</guid><pubDate>Fri, 16 Aug 2024 03:56:43 GMT</pubDate></item><item><title><![CDATA[2. SQL Server String Functions]]></title><description><![CDATA[ 
+ <br><br>String functions are essential tools in your SQL Server arsenal, allowing you to manipulate text data effectively. Let's dive into some common functions with clear examples:<br>Scenario: Imagine you have a Customers table with columns like FirstName, LastName, and Email.<br>1. LEN(string): Measuring String Length<br>
+<br>Purpose:  Find out how many characters are in a string.
+<br>-- Example: Get the length of each customer's last name
+SELECT FirstName, LastName, LEN(LastName) AS LastNameLength
+FROM Customers;
+<br>2. UPPER(string) and LOWER(string): Case Conversion<br>
+<br>Purpose:  Transform strings to uppercase or lowercase.
+<br>-- Example: Display all email addresses in lowercase
+SELECT LOWER(Email) AS LowercaseEmail
+FROM Customers;
+
+-- Example: Convert first names to uppercase
+SELECT UPPER(FirstName) AS UppercaseFirstName
+FROM Customers; 
+<br>3. SUBSTRING(string, start, length): Extracting Portions of Text<br>
+<br>Purpose:  Grab a specific part of a string based on starting position and length.
+<br>-- Example: Get the first 3 characters of each customer's email address
+SELECT SUBSTRING(Email, 1, 3) AS EmailPrefix
+FROM Customers;
+
+-- Example: Extract the domain name from the email address
+SELECT SUBSTRING(Email, CHARINDEX('@', Email) + 1, LEN(Email)) AS EmailDomain
+FROM Customers;
+<br>4. REPLACE(string, old_string, new_string): Search and Replace<br>
+<br>Purpose: Substitute occurrences of a string with another string.
+<br>-- Example: Replace 'example.com' with 'domain.com' in email addresses
+SELECT REPLACE(Email, 'gmail.com', 'outlook.com') AS UpdatedEmail
+FROM Customers; 
+<br>Key Points to Remember<br>
+<br>Case Sensitivity: SQL Server can be case-sensitive or insensitive depending on your server's collation settings.
+<br>Starting Index:  In SUBSTRING, the starting index is 1-based (the first character is at position 1).
+<br>Real-world Applications: String functions are invaluable for cleaning data, formatting output, and enabling powerful text-based searches. 
+<br><a data-tooltip-position="top" aria-label="mailto:akhil@gmail.com" rel="noopener nofollow" class="external-link" href="mailto:akhil@gmail.com" target="_blank">akhil@gmail.com</a> --&gt; <a data-tooltip-position="top" aria-label="mailto:akhil@outlook.com" rel="noopener nofollow" class="external-link" href="mailto:akhil@outlook.com" target="_blank">akhil@outlook.com</a>]]></description><link>SQL-SERVER\2. FUNCTIONS\2. SQL Server String Functions.html</link><guid isPermaLink="false">SQL-SERVER/2. FUNCTIONS/2. SQL Server String Functions.md</guid><pubDate>Wed, 10 Jul 2024 03:22:34 GMT</pubDate></item><item><title><![CDATA[3. Date and Time Functions]]></title><description><![CDATA[ 
+ <br>Scenario: Imagine you're working with an Orders table that includes columns like OrderID, OrderDate, and ShippedDate.<br>1. GETDATE(): Capturing the Current Moment<br>
+<br>Purpose: Retrieves the current date and time from the server. This is dynamic and changes with each execution.
+<br>-- Example: Add a new order with the current date and time
+INSERT INTO Orders (OrderID, OrderDate)
+VALUES (1001, GETDATE()); 
+<br>2. DATEADD(datepart, number, date): Time Travel Calculations<br>
+<br>Purpose:  Shifts a date by adding or subtracting units like days, months, or years.
+<br>datepart specifies the unit (e.g., 'day', 'month', 'year').
+<br>-- Example: Calculate a due date 7 days after the order date
+SELECT OrderID, OrderDate, DATEADD(day, 7, OrderDate) AS DueDate
+FROM Orders;
+
+-- Example: Find orders placed in the previous month 
+SELECT *
+FROM Orders
+WHERE OrderDate &gt;= DATEADD(month, -1, GETDATE());
+<br>3. DATEDIFF(datepart, startdate, enddate): Measuring Time Intervals<br>
+<br>Purpose: Determines the difference between two dates in specified units.
+<br>-- Example: Calculate the number of days between order date and shipped date
+SELECT OrderID, OrderDate, ShippedDate, 
+       DATEDIFF(day, OrderDate, ShippedDate) AS ShippingTime
+FROM Orders;
+
+-- Example: Find orders older than 30 days
+SELECT * 
+FROM Orders
+WHERE DATEDIFF(day, OrderDate, GETDATE()) &gt; 30;
+<br>4. DATEPART(datepart, date): Isolating Date Components<br>
+<br>Purpose:  Extracts a specific part (e.g., day of the week, month, year) from a date.
+<br>-- Example: Group orders by the month in which they were placed
+SELECT DATEPART(month, OrderDate) AS OrderMonth, COUNT(*) AS TotalOrders
+FROM Orders
+GROUP BY DATEPART(month, OrderDate);
+
+-- Example: Find orders placed on weekends (Saturday or Sunday)
+SELECT * 
+FROM Orders
+WHERE DATEPART(weekday, OrderDate) IN (1, 7);  
+<br>Important Notes:<br>
+<br>datepart Values: Familiarize yourself with the various datepart abbreviations for precise calculations (e.g., 'wk' for week, 'yy' for year, 'hh' for hour).
+<br>Data Type Compatibility: Ensure that the dates you're working with are in a valid date or datetime data type for accurate results.
+]]></description><link>SQL-SERVER\2. FUNCTIONS\3. Date and Time Functions.html</link><guid isPermaLink="false">SQL-SERVER/2. FUNCTIONS/3. Date and Time Functions.md</guid><pubDate>Tue, 09 Jul 2024 18:13:44 GMT</pubDate></item><item><title><![CDATA[4. Mathematical Functions]]></title><description><![CDATA[ 
+ <br>Scenario: Let's say you manage a financial database with a table named Transactions containing columns such as TransactionID, Amount, and Balance.<br>1. ABS(number): Focusing on Magnitude<br>
+<br>Purpose: Returns the positive version of any number. Useful for calculations where the sign doesn't matter, just the size of the value.
+<br>-- Example: Identify transactions with significant amount fluctuations (positive or negative)
+SELECT TransactionID, Amount, ABS(Amount) AS AbsoluteAmount
+FROM Transactions
+WHERE ABS(Amount) &gt; 1000; 
+<br>2. ROUND(number, decimals): Controlling Precision<br>
+<br>Purpose: Rounds a number to a specific number of decimal places. Essential for financial reporting and displaying values with consistent precision. 
+<br>-- Example: Display account balances rounded to two decimal places
+SELECT AccountID, ROUND(Balance, 2) AS RoundedBalance
+FROM Accounts;
+
+-- Example: Round a calculation within a query
+SELECT ProductID, Price, Quantity,
+       ROUND(Price * Quantity * 1.07, 2) AS TotalCostWithTax 
+FROM OrderItems;
+<br>3. CEILING(number): Rounding Upwards<br>
+<br>Purpose: Finds the smallest integer greater than or equal to the given number.  Practical for scenarios like calculating the minimum number of boxes needed to pack items.
+<br>-- Example: Calculate the number of containers needed based on item quantities
+SELECT ItemID, Quantity, CEILING(Quantity / 10.0) AS ContainersNeeded
+FROM Inventory;
+
+-- Example:  Round up a calculated value
+SELECT ProjectID, EstimatedHours, CEILING(EstimatedHours * 1.15) AS BudgetHours 
+FROM Projects;
+<br>4. FLOOR(number): Rounding Downwards<br>
+<br>Purpose: Returns the largest integer less than or equal to the given number.  Helpful for situations like determining how many full units can be purchased with a given budget. 
+<br>-- Example: Calculate the maximum number of units affordable based on budget and unit price
+DECLARE @Budget DECIMAL(10,2) = 500.00;
+DECLARE @UnitPrice DECIMAL(10,2) = 12.75;
+
+SELECT FLOOR(@Budget / @UnitPrice) AS MaxUnitsAffordable; 
+<br>Additional Tips<br>
+<br>Combining Functions:  You can often nest mathematical functions within each other for more complex calculations.
+<br>Data Type Considerations: Be mindful of the data types you're using. For instance, CEILING and FLOOR return integers, so if you need decimal precision, cast the result to a decimal data type. 
+]]></description><link>SQL-SERVER\2. FUNCTIONS\4. Mathematical Functions.html</link><guid isPermaLink="false">SQL-SERVER/2. FUNCTIONS/4. Mathematical Functions.md</guid><pubDate>Tue, 09 Jul 2024 18:11:10 GMT</pubDate></item><item><title><![CDATA[5. Aggregate functions]]></title><description><![CDATA[ 
+ <br>Scenario: Let's say you're analyzing sales data stored in an Orders table with columns like OrderID, CustomerID, OrderDate, and TotalAmount.<br>1. COUNT(*): Counting Records<br>
+<br>Purpose:  Determine the total number of rows in a table or within groups.
+<br>-- Example: Find the total number of orders
+SELECT COUNT(*) AS TotalOrders
+FROM Orders;
+
+-- Example: Count orders per customer 
+SELECT CustomerID, COUNT(*) AS OrderCount
+FROM Orders
+GROUP BY CustomerID;
+<br>2. SUM(expression): Calculating Totals<br>
+<br>Purpose: Add up values in a numeric column.
+<br>-- Example: Calculate total revenue from all orders
+SELECT SUM(TotalAmount) AS TotalRevenue
+FROM Orders;
+
+-- Example: Calculate the total sales for each month
+SELECT YEAR(OrderDate) AS SaleYear, 
+       MONTH(OrderDate) AS SaleMonth,
+       SUM(TotalAmount) AS MonthlyRevenue
+FROM Orders
+GROUP BY YEAR(OrderDate), MONTH(OrderDate)
+ORDER BY SaleYear, SaleMonth;
+<br>3. AVG(expression): Finding Averages<br>
+<br>Purpose: Calculate the mean (average) of values in a column.
+<br>-- Example:  Calculate the average order value
+SELECT AVG(TotalAmount) AS AverageOrderValue
+FROM Orders;
+
+-- Example: Calculate the average order value for each customer
+SELECT CustomerID, AVG(TotalAmount) AS AverageCustomerOrderValue
+FROM Orders
+GROUP BY CustomerID;
+<br>4. MIN(expression) and MAX(expression): Exploring Ranges<br>
+<br>Purpose:  Identify the smallest and largest values in a column.
+<br>-- Example: Find the earliest and latest order dates
+SELECT 
+    MIN(OrderDate) AS EarliestOrderDate, 
+    MAX(OrderDate) AS LatestOrderDate
+FROM Orders;
+
+-- Example:  Find the highest total amount for each day
+SELECT 
+    CAST(OrderDate AS DATE) AS OrderDay, 
+    MAX(TotalAmount) AS HighestDailyAmount
+FROM Orders
+GROUP BY CAST(OrderDate AS DATE); 
+<br>Important Considerations:<br>
+<br>GROUP BY Clause:  Aggregate functions are often paired with the GROUP BY clause to perform calculations on subsets of your data.
+<br>NULL Values: By default, most aggregate functions (except COUNT(*)) ignore NULL values. Be mindful of how NULLs might impact your results.
+<br>Subqueries: Aggregate functions can be effectively used within subqueries to perform multi-step calculations. 
+]]></description><link>SQL-SERVER\2. FUNCTIONS\5. Aggregate functions.html</link><guid isPermaLink="false">SQL-SERVER/2. FUNCTIONS/5. Aggregate functions.md</guid><pubDate>Tue, 09 Jul 2024 18:13:38 GMT</pubDate></item><item><title><![CDATA[6. Group by and Having Clause]]></title><description><![CDATA[ 
+ <br><br>1. GROUP BY Clause<br>
+<br>Purpose: Groups rows with the same values in one or more columns into a summary row.
+<br>Syntax:  GROUP BY column1, column2, ... 
+<br>Example: 
+<br>SELECT Department, AVG(Salary) FROM Employees GROUP BY Department;
+
+    -- This groups employees by department and calculates the average salary for each department.
+<br>Imagine you have a basket full of different fruits: apples, oranges, and bananas. <br>Think of the GROUP BY clause in SQL like sorting those fruits into separate sections of the basket based on their type.  You'll end up with:<br>
+<br>All the apples grouped together
+<br>All the oranges grouped together
+<br>All the bananas grouped together
+<br>In more technical SQL terms:<br>
+<br>You have a table (your basket) full of data rows (your fruits).
+<br>The GROUP BY clause lets you choose a column (like "fruit type") to group by.
+<br>SQL then creates distinct groups of rows, where each group contains only the rows that share the same value in that chosen column.
+<br>Why is this useful?<br>Once you have these groups, you can perform calculations on each group individually. For example, you can use aggregate functions like:<br>
+<br>COUNT: How many fruits are in each group? (COUNT(*))
+<br>SUM: What's the total weight of all the fruits within each group? (SUM(Weight))
+<br>AVG: What's the average size of the apples (considering only the apples)? (AVG(Size) WHERE FruitType = 'Apple')
+<br>So, instead of analyzing the entire basket of fruit at once, GROUP BY lets you break down your data into smaller, more manageable chunks, which you can then analyze to gain more specific insights. <br>2. HAVING Clause<br>
+<br>Purpose: Filters the results after the GROUP BY aggregation. It's like a WHERE clause for grouped data.
+<br>Syntax: HAVING condition (where condition often includes aggregate functions)
+<br>Example: SELECT Department, AVG(Salary) FROM Employees GROUP BY Department HAVING AVG(Salary) &gt; 50000;
+
+<br>This only shows departments where the average salary is greater than 50000.
+
+
+<br>Key Points:<br>
+<br>You cannot use aggregate functions directly in the WHERE clause because WHERE filters rows before aggregation.
+<br>HAVING is used specifically to filter groups based on aggregated values.
+<br>GROUP BY must be used with aggregate functions (like AVG, SUM, COUNT) when you want to calculate those functions for each group.
+<br><br>Let's work with a sample table called Orders:<br><br>Questions:<br>
+<br>Calculate the average order amount for all orders.
+<br>Find the average order amount for each customer.
+<br>Get the CustomerID and their average order amount, but only for customers with an average order amount greater than 100.
+<br>On which date was the total order amount the highest?
+<br>How many orders were placed by each customer?
+<br>Answers:<br>
+<br>SELECT AVG(TotalAmount) AS AverageOrderAmount FROM Orders;
+<br>SELECT CustomerID, AVG(TotalAmount) AS AverageOrderAmount FROM Orders GROUP BY CustomerID;
+<br>SELECT CustomerID, AVG(TotalAmount) AS AverageOrderAmount FROM Orders GROUP BY CustomerID HAVING AVG(TotalAmount) &gt; 100;
+<br>SELECT TOP 1 OrderDate, SUM(TotalAmount) AS TotalOrderAmount FROM Orders GROUP BY OrderDate ORDER BY TotalOrderAmount DESC;
+<br>SELECT CustomerID, COUNT(*) AS OrderCount FROM Orders GROUP BY CustomerID; 
+<br>Let me know if you would like me to elaborate on any of these concepts or if you have any other SQL Server questions! <br>Alright, here's an activity-based question using the HAVING clause and focusing on an "Orders" table:<br>Scenario:<br>You work for an e-commerce company, and you have a table named Orders with the following columns:<br>
+<br>OrderID (INT): Unique identifier for each order.
+<br>CustomerID (INT): The ID of the customer who placed the order.
+<br>OrderDate (DATE): The date when the order was placed.
+<br>TotalAmount (DECIMAL): The total amount of the order.
+<br>Challenge:<br>You want to identify customers who have placed at least two orders, and whose average order total is greater than 100. Write a SQL query to retrieve the CustomerID and the average order total (AvgOrderTotal) for these customers.<br>Think about:<br>
+<br>Grouping: How will you group the orders to calculate the average order total for each customer?
+<br>Aggregate Functions: What functions will you need to calculate the average order total and the number of orders per customer?
+<br>Filtering (HAVING): How will you use the HAVING clause to select only the customers who meet the specified criteria (at least two orders and an average order total greater than $100)?
+<br>Bonus:<br>
+<br>Try to write the query in more than one way if you can! There are often multiple ways to achieve the same result in SQL. 
+<br>I'm here to help if you get stuck, or if you'd like to check your answer!<br>
+You're right to ask! Here's the SQL query to solve the "Orders" table challenge, along with a breakdown of how it works:<br>SELECT CustomerID, AVG(TotalAmount) AS AvgOrderTotal
+FROM Orders
+GROUP BY CustomerID
+HAVING COUNT(*) &gt;= 2 AND AVG(TotalAmount) &gt; 100; 
+<br>Explanation:<br>
+<br>
+SELECT CustomerID, AVG(TotalAmount) AS AvgOrderTotal:  
+
+<br>This part specifies that we want to retrieve the CustomerID and the average order total (which we'll alias as AvgOrderTotal) for each customer.
+
+
+<br>
+FROM Orders:
+
+<br>This indicates that we are retrieving data from the Orders table.
+
+
+<br>
+GROUP BY CustomerID: 
+
+<br>This is the crucial step where we group the orders based on CustomerID.  SQL Server will now treat each unique CustomerID as a separate group, allowing us to perform calculations for each customer individually.
+
+
+<br>
+HAVING COUNT(*) &gt;= 2 AND AVG(TotalAmount) &gt; 100:
+
+<br>Here's where the HAVING clause comes in to filter our grouped results:
+
+<br>COUNT(*) &gt;= 2: This condition ensures that we only include customers who have placed two or more orders. COUNT(*) counts the number of rows (orders) within each group (customer).
+<br>AVG(TotalAmount) &gt; 100: This condition filters for customers whose average order total is strictly greater than $100.
+
+
+
+
+<br>In simple terms, this query finds customers who are both frequent buyers (at least two orders) and have a high average spending amount (over $100 per order). <br>Let me know if you would like to see alternative ways to write this query or if you have any other SQL questions! ]]></description><link>SQL-SERVER\2. FUNCTIONS\6. Group by and Having Clause.html</link><guid isPermaLink="false">SQL-SERVER/2. FUNCTIONS/6. Group by and Having Clause.md</guid><pubDate>Sat, 17 Aug 2024 04:57:15 GMT</pubDate></item><item><title><![CDATA[FUNCTIONS]]></title><description><![CDATA[ 
+ <br><a data-tooltip-position="top" aria-label="SQL-SERVER/2. FUNCTIONS/1. INTRODUCTION" data-href="SQL-SERVER/2. FUNCTIONS/1. INTRODUCTION" href="SQL-SERVER\2. FUNCTIONS\1. INTRODUCTION.html" class="internal-link" target="_self" rel="noopener nofollow">1. INTRODUCTION</a><br>
+<a data-href="2. SQL Server String Functions" href="SQL-SERVER\2. FUNCTIONS\2. SQL Server String Functions.html" class="internal-link" target="_self" rel="noopener nofollow">2. SQL Server String Functions</a><br>
+<a data-href="3. Date and Time Functions" href="SQL-SERVER\2. FUNCTIONS\3. Date and Time Functions.html" class="internal-link" target="_self" rel="noopener nofollow">3. Date and Time Functions</a><br>
+<a data-href="4. Mathematical Functions" href="SQL-SERVER\2. FUNCTIONS\4. Mathematical Functions.html" class="internal-link" target="_self" rel="noopener nofollow">4. Mathematical Functions</a><br>
+<a data-href="5. Aggregate functions" href="SQL-SERVER\2. FUNCTIONS\5. Aggregate functions.html" class="internal-link" target="_self" rel="noopener nofollow">5. Aggregate functions</a><br>
+<a data-href="6. Group by and Having Clause" href="SQL-SERVER\2. FUNCTIONS\6. Group by and Having Clause.html" class="internal-link" target="_self" rel="noopener nofollow">6. Group by and Having Clause</a>]]></description><link>SQL-SERVER\2. FUNCTIONS\FUNCTIONS.html</link><guid isPermaLink="false">SQL-SERVER/2. FUNCTIONS/FUNCTIONS.md</guid><pubDate>Mon, 23 Dec 2024 16:19:26 GMT</pubDate></item><item><title><![CDATA[1. Introduction to Joins Cross Joins]]></title><description><![CDATA[ 
+ <br>You got it!  Formatted tables make a big difference in readability.  <br>Here's the improved section with the tables formatted properly in Markdown:<br><br>Why Joins Matter<br>Relational databases, like MSSQL Server, organize data into multiple tables to reduce data duplication and enhance consistency.  Joins provide the bridge to combine data from these related tables when you need to retrieve information that spans across them.<br>Cross Joins: Your First Foray into Combinations<br>Imagine you want to explore every possible combination of items from two different sets. This is where the Cross Join shines in MSSQL Server. <br>Key Points<br>
+<br>
+Cartesian Product: A Cross Join generates a result set containing all possible pairings of rows from the two tables involved.  If Table A has 'm' rows, and Table B has 'n' rows, a Cross Join results in 'm * n' rows.
+
+<br>
+Syntax: In MSSQL Server, you have two primary ways to write a Cross Join:
+-- Explicit CROSS JOIN Syntax
+SELECT column(s)
+FROM table1
+CROSS JOIN table2;
+
+-- Using a comma (,) - Implicit Join Syntax (Often Discouraged) 
+SELECT column(s)
+FROM table1, table2;  
+
+
+<br>
+Example: Menu Combinations
+  Let's say you're a restaurant owner planning a new menu. You have separate tables for main courses and side dishes:
+  Table: MainCourses
+
+  Table: SideDishes
+
+  Cross Join Result:
+SELECT DishName, SideName
+FROM MainCourses
+CROSS JOIN SideDishes;
+
+
+
+<br>Common Use Cases<br>
+<br>Generating Reports:  Cross Joins are helpful for creating reports where you need to see data from multiple tables combined in all possible permutations.
+<br>Test Data Generation:  They can quickly create a large volume of test data by combining various values.
+<br>Cautions:<br>
+<br>Performance:  Exercise caution with large tables, as Cross Joins can generate massive result sets, potentially impacting query performance. 
+<br>Use Cases: Cross Joins are less common than other joins for everyday queries involving specific relationships between tables. 
+]]></description><link>SQL-SERVER\3. JOINS\1. Introduction to Joins Cross Joins.html</link><guid isPermaLink="false">SQL-SERVER/3. JOINS/1. Introduction to Joins Cross Joins.md</guid><pubDate>Wed, 10 Jul 2024 18:22:41 GMT</pubDate></item><item><title><![CDATA[2. Inner Join]]></title><description><![CDATA[ 
+ <br><br>While Cross Joins create all possible combinations, Inner Joins are more selective. They focus on retrieving rows only when a match is found between the tables based on the specified join condition.<br>Key Characteristics<br>
+<br>Matching Rows: Inner Joins return rows only when the join condition evaluates to TRUE for both tables being joined.
+<br>Common Column: This join type typically relies on a shared column (often a primary key in one table and a foreign key in the other) to establish the relationship between the tables.
+<br>Implicit Intersection: You can think of an Inner Join as finding the intersection between two sets of data.
+<br>Syntax in MSSQL Server<br>SELECT column(s)
+FROM table1
+INNER JOIN table2 
+ON table1.common_column = table2.common_column;
+<br>Example: Orders and Customers<br>Let's say you have two tables: <br>Table: Customers<br><br>Table: Orders<br><br>Inner Join to Get Order Details with Customer Names:<br>SELECT o.OrderID, c.CustomerName, o.OrderAmount
+FROM Orders o
+INNER JOIN Customers c ON o.CustomerID = c.CustomerID;
+<br>Result:<br><br>Explanation:<br>
+<br>The query retrieves the OrderID, CustomerName, and OrderAmount.
+<br>It joins Orders (aliased as o) with Customers (aliased as c).
+<br>The join condition o.CustomerID = c.CustomerID matches orders with their corresponding customers based on the common CustomerID column. 
+<br>Notice that only orders with matching customers in the Customers table are included in the result. 
+<br>When to Use Inner Joins<br>
+<br>When you need data from multiple tables, but only where there's a direct relationship (match) between the rows in those tables.
+<br>This is one of the most frequent join types used in SQL for combining related data. 
+<br>Let me know if you'd like to see more complex examples or have any other SQL join questions! ]]></description><link>SQL-SERVER\3. JOINS\2. Inner Join.html</link><guid isPermaLink="false">SQL-SERVER/3. JOINS/2. Inner Join.md</guid><pubDate>Sat, 31 Aug 2024 04:29:47 GMT</pubDate></item><item><title><![CDATA[3. Outer Joins]]></title><description><![CDATA[ 
+ <br>You're on a roll with joins! Let's tackle Outer Joins, which are particularly useful when you want to include all rows from one table, even if there are no matching rows in the other table.<br><br>Understanding Outer Joins<br>Unlike Inner Joins that only return matching rows, Outer Joins include all rows from at least one of the tables involved, even if a match isn't found in the other table.  They fill in any missing values with NULL.<br>Types of Outer Joins<br>
+<br>
+LEFT (OUTER) JOIN:
+
+<br>Returns all rows from the "left" table (the table mentioned before LEFT JOIN in the query).
+<br>Returns matching rows from the "right" table based on the join condition.
+<br>If there's no match on the right, it puts NULL in the columns from the right table.
+
+
+<br>
+RIGHT (OUTER) JOIN:
+
+<br>The mirror image of a LEFT JOIN. 
+<br>Returns all rows from the "right" table.
+<br>Returns matching rows from the "left" table.
+<br>Fills in NULL values for missing matches on the left.
+
+
+<br>
+FULL (OUTER) JOIN:
+
+<br>The most inclusive join type.
+<br>Returns all rows from both the left and right tables.
+<br>If there's a match, it combines the data. Otherwise, it uses NULL for missing values.
+
+
+<br>Example: Customers and Orders (Again)<br>Let's use our Customers and Orders tables from the previous example, but this time we'll add a new customer who hasn't placed any orders yet:<br>Table: Customers<br><br>Table: Orders <br><br>Left Outer Join to Find All Customers and Their Orders (or Lack Thereof):<br>SELECT c.CustomerID, c.CustomerName, o.OrderID, o.OrderAmount
+FROM Customers c
+LEFT JOIN Orders o ON c.CustomerID = o.CustomerID;
+<br>Result:<br><br>Explanation:<br>
+<br>We retrieve data from Customers (left table) and Orders (right table).
+<br>LEFT JOIN ensures we get all customers, regardless of whether they have orders.
+<br>Bob, with CustomerID 2, has no matching orders, so OrderID and OrderAmount are NULL for him. 
+<br>Choosing the Right Join Type<br>
+<br>Inner Join: When you only need matching rows from both tables.
+<br>Left Join: When you need all rows from the left table, even if there are no matches in the right.
+<br>Right Join:  When you need all rows from the right table, even if there are no matches in the left.
+<br>Full Join: When you need all rows from both tables, regardless of matches. 
+<br>Let me know if you'd like more examples or want to explore any specific Outer Join scenarios! ]]></description><link>SQL-SERVER\3. JOINS\3. Outer Joins.html</link><guid isPermaLink="false">SQL-SERVER/3. JOINS/3. Outer Joins.md</guid><pubDate>Wed, 10 Jul 2024 18:25:07 GMT</pubDate></item><item><title><![CDATA[4. SQL Set Operations with a focus on `UNION` and `INTERSECT`]]></title><description><![CDATA[ 
+ <br>All right, let's explore SQL Set Operations with a focus on UNION and INTERSECT, complete with notes, a sample table, activity, and solutions.<br>SQL Set Operations: UNION and INTERSECT<br>Notes:<br>
+<br>
+Purpose: Set operations combine data from two or more SELECT statements into a single result set. The tables involved should generally have the same number of columns and compatible data types.
+
+<br>
+UNION: 
+
+<br>Combines all distinct rows from the result sets of two or more SELECT statements.
+<br>Eliminates duplicate rows by default. 
+<br>Use UNION ALL to include duplicates.
+
+
+<br>
+INTERSECT:
+
+<br>Returns only the rows that are common to all the SELECT statements.
+
+
+<br>Sample Tables:<br>Let's work with two tables for our activity:<br>Table: Customers<br><br>Table: Orders<br><br>Activity:<br>Instructions: Write SQL queries using UNION and INTERSECT to answer the following questions.<br>
+<br>List all customer names from both the Customers and Orders tables (including duplicates).
+<br>List all unique customer names from the Customers and Orders tables.
+<br>Find the first names of customers who have placed orders.
+<br>List all customer IDs that appear in both the Customers and Orders tables.
+<br>Combine all customer first names and last names into a single column, eliminating duplicates.
+<br>List the first names of customers who live in 'New York' and have placed an order.
+<br>Find the customer IDs that exist in the Customers table but not in the Orders table. 
+<br>Combine all cities from the Customers table with 'London' from the Orders table, removing duplicates.
+<br>List all customer last names from the Customers table that also appear as order amounts in the Orders table.
+<br>Get the first names of customers who have either placed an order or live in 'Paris'.
+<br>Answers:<br>-- 1. List all customer names (including duplicates)
+SELECT FirstName FROM Customers
+UNION ALL
+SELECT FirstName FROM Orders; //INCORRECT
+
+-- 2. List all unique customer names
+SELECT FirstName FROM Customers
+UNION 
+SELECT FirstName FROM Orders;// INCORRECT
+
+-- 3. First names of customers who have placed orders
+SELECT DISTINCT c.FirstName 
+FROM Customers c
+INNER JOIN Orders o ON c.CustomerID = o.CustomerID;
+
+-- 4. Customer IDs in both tables 
+SELECT CustomerID FROM Customers
+INTERSECT
+SELECT CustomerID FROM Orders; 
+
+-- 5. Combined first and last names (no duplicates)
+SELECT FirstName FROM Customers
+UNION 
+SELECT LastName FROM Customers;
+
+-- 6. First names of customers in 'New York' who placed an order
+SELECT DISTINCT c.FirstName
+FROM Customers c
+INNER JOIN Orders o ON c.CustomerID = o.CustomerID
+WHERE c.City = 'New York';
+
+-- 7. Customer IDs in 'Customers' but not in 'Orders'
+SELECT CustomerID FROM Customers
+EXCEPT
+SELECT CustomerID FROM Orders; 
+
+-- 8. Combine cities, removing duplicates, including 'London'
+SELECT City FROM Customers
+UNION
+SELECT 'London'; 
+
+-- 9. Last names from 'Customers' that are amounts in 'Orders'
+SELECT LastName FROM Customers
+INTERSECT
+SELECT CAST(Amount AS VARCHAR(50)) FROM Orders; 
+
+-- 10. First names of customers who ordered or live in 'Paris'
+SELECT FirstName FROM Customers WHERE City = 'Paris'
+UNION 
+SELECT c.FirstName FROM Customers c JOIN Orders o ON c.CustomerID = o.CustomerID; 
+<br>Let me know if you would like to explore other set operations (like EXCEPT) or have any more SQL challenges for me! ]]></description><link>SQL-SERVER\3. JOINS\4. SQL Set Operations with a focus on `UNION` and `INTERSECT`.html</link><guid isPermaLink="false">SQL-SERVER/3. JOINS/4. SQL Set Operations with a focus on `UNION` and `INTERSECT`.md</guid><pubDate>Sat, 31 Aug 2024 09:58:29 GMT</pubDate></item><item><title><![CDATA[JOINS]]></title><description><![CDATA[ 
+ <br><a data-href="1. Introduction to Joins Cross Joins" href="SQL-SERVER\3. JOINS\1. Introduction to Joins Cross Joins.html" class="internal-link" target="_self" rel="noopener nofollow">1. Introduction to Joins Cross Joins</a><br>
+<a data-href="2. Inner Join" href="SQL-SERVER\3. JOINS\2. Inner Join.html" class="internal-link" target="_self" rel="noopener nofollow">2. Inner Join</a><br>
+<a data-href="3. Outer Joins" href="SQL-SERVER\3. JOINS\3. Outer Joins.html" class="internal-link" target="_self" rel="noopener nofollow">3. Outer Joins</a><br>
+<a data-href="4. SQL Set Operations with a focus on `UNION` and `INTERSECT`" href="SQL-SERVER\3. JOINS\4. SQL Set Operations with a focus on `UNION` and `INTERSECT`.html" class="internal-link" target="_self" rel="noopener nofollow">4. SQL Set Operations with a focus on `UNION` and `INTERSECT`</a>]]></description><link>SQL-SERVER\3. JOINS\JOINS.html</link><guid isPermaLink="false">SQL-SERVER/3. JOINS/JOINS.md</guid><pubDate>Mon, 23 Dec 2024 16:20:13 GMT</pubDate></item><item><title><![CDATA[1. UNIQUE]]></title><description><![CDATA[ 
+ <br>UNIQUE Constraints<br>
+<br>Purpose: Ensures that all values in a column or a set of columns are unique (no duplicates allowed) within a table. 
+<br>How it differs from Primary Key:
+
+<br>A table can have only one Primary Key, but it can have multiple UNIQUE constraints.
+<br>The Primary Key constraint by default creates a clustered index, whereas a UNIQUE constraint creates a non-clustered index (you can, however, explicitly make a UNIQUE constraint create a clustered index).
+<br>Primary keys cannot allow NULL values, while UNIQUE constraints can allow one NULL value (as long as all other values are unique). 
+
+
+<br>Syntax:<br>
+<br>
+Inline Definition (within the column definition):
+CREATE TABLE table_name (
+    column_name data_type UNIQUE,
+    ...
+);
+
+
+<br>
+Separate Definition (after all columns are defined):
+CREATE TABLE table_name (
+    column_name data_type,
+    ...
+    CONSTRAINT constraint_name UNIQUE (column_name)
+);
+
+
+<br>
+UNIQUE Constraint on Multiple Columns:
+CREATE TABLE table_name (
+    column1 data_type,
+    column2 data_type,
+    ...,
+    CONSTRAINT constraint_name UNIQUE (column1, column2) 
+);
+
+
+<br>Examples:<br>-- Example 1: Single column UNIQUE constraint
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Email VARCHAR(255) UNIQUE, -- Ensures all email addresses are unique
+    ... 
+);
+
+-- Example 2: UNIQUE constraint on multiple columns 
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(255),
+    SupplierID INT, 
+    CONSTRAINT UC_ProductSupplier UNIQUE (ProductName, SupplierID)  -- ProductName and SupplierID combination must be unique
+);
+<br>Benefits of UNIQUE Constraints:<br>
+<br>Data Integrity: Enforces uniqueness, preventing duplicate entries for critical data.
+<br>Query Optimization: Database systems can use UNIQUE indexes (created automatically to support the constraint) to speed up data retrieval.
+<br>Business Rule Enforcement: Enforces business rules requiring unique values, such as email addresses, product codes, or usernames.
+<br>Key Points to Remember:<br>
+<br>A UNIQUE constraint allows only one NULL value.
+<br>If you try to insert a duplicate value that violates a UNIQUE constraint, the database will raise an error and prevent the insertion.
+<br>I hope this explanation of UNIQUE constraints is clear! Let me know if you have any more SQL constraint questions. ]]></description><link>SQL-SERVER\4. WORKING WITH CONSTRAINTS\1. UNIQUE.html</link><guid isPermaLink="false">SQL-SERVER/4. WORKING WITH CONSTRAINTS/1. UNIQUE.md</guid><pubDate>Fri, 30 Aug 2024 04:22:12 GMT</pubDate></item><item><title><![CDATA[2. NOT NULL]]></title><description><![CDATA[ 
+ <br>NOT NULL Constraint<br>
+<br>
+Purpose: The NOT NULL constraint is your way of enforcing data integrity by specifying that a column cannot contain NULL values. In simple terms, you are making that column required when inserting data into the table.
+
+<br>
+Syntax:
+CREATE TABLE table_name (
+    column_name data_type NOT NULL, 
+    ...
+);
+
+
+<br>
+Example:
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL, 
+    Email VARCHAR(255),            -- Email is allowed to be NULL
+    ...
+);
+
+ In this example:
+
+<br>FirstName and LastName are marked as NOT NULL, so you must provide values for these columns when adding a new customer to the Customers table.
+<br>Email is allowed to be NULL, meaning it's optional.
+
+
+<br>Key Points:<br>
+<br>Data Integrity:  The primary role of NOT NULL is to make your data more reliable. When you know a column can't be NULL, you avoid potential issues in queries, calculations, or application logic that might arise from missing values.
+<br>Error Handling: If you try to insert a new row into a table without providing a value for a NOT NULL column, SQL Server will raise an error, and the insertion will fail. This prevents incomplete data from entering your tables.
+<br>Design Best Practices:  It's good database design practice to use NOT NULL for columns that are logically required or where a missing value doesn't make sense in your application's context.
+<br>Additional Considerations:<br>
+<br>Default Values: You can combine a NOT NULL constraint with a DEFAULT constraint. If a new row doesn't provide a value for the column, the default value will be automatically used. 
+<br>Checking for NULL Values: While NOT NULL prevents NULL values from getting into your table, you might still need to check for NULL values in existing data. Use the IS NOT NULL operator for this:
+SELECT * FROM Customers WHERE Email IS NOT NULL;
+
+
+]]></description><link>SQL-SERVER\4. WORKING WITH CONSTRAINTS\2. NOT NULL.html</link><guid isPermaLink="false">SQL-SERVER/4. WORKING WITH CONSTRAINTS/2. NOT NULL.md</guid><pubDate>Thu, 11 Jul 2024 18:23:05 GMT</pubDate></item><item><title><![CDATA[3. PRIMARY KEY]]></title><description><![CDATA[ 
+ <br>Let's delve into the crucial concept of Primary Keys in Microsoft SQL Server.<br>What is a Primary Key?<br>
+<br>
+Definition: A Primary Key is a special constraint in a SQL Server table that uniquely identifies each record (or row) in that table. Think of it as a unique identifier, like a Social Security number or a passport number.
+
+<br>
+Purpose:
+
+<br>Uniquely Identify Records:  It ensures that no two rows in your table have the same primary key value.
+<br>Enforce Data Integrity: It's a fundamental part of maintaining the accuracy and consistency of your data.
+<br>Relationship Building: Primary keys are also used to establish relationships between tables (using Foreign Key constraints, which we can explore if you'd like).
+
+
+<br>Key Characteristics of a Primary Key:<br>
+<br>Uniqueness: Every value in the primary key column(s) must be unique. No duplicates allowed!
+<br>Non-Nullability: A primary key column cannot contain NULL values.  It must have a value for every row in the table. 
+<br>Single Primary Key per Table:  A table can have only one Primary Key constraint.
+<br>Data Type Considerations: While you can choose from various data types, it's common to use integer types (INT, BIGINT) for primary keys due to their efficiency for indexing and searching.
+<br>Syntax for Creating a Primary Key:<br>There are two ways to define a Primary Key constraint:<br>
+<br>
+Inline Definition (within the column definition):
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,  -- Primary key defined here
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    ...
+);
+
+
+<br>
+Separate Definition (after all columns are defined):
+CREATE TABLE Employees (
+    EmployeeID INT,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    ...
+    CONSTRAINT PK_Employees PRIMARY KEY (EmployeeID)  -- Separate Primary Key definition
+); 
+
+
+<br>Important Notes:<br>
+<br>Clustered Index: By default, when you create a Primary Key constraint in SQL Server, a clustered index is automatically created on the primary key column(s). This index helps speed up data retrieval based on the primary key. 
+<br>Composite Primary Key:  You can define a primary key on multiple columns if a single column cannot guarantee uniqueness. For example: 
+CONSTRAINT PK_OrderDetails PRIMARY KEY (OrderID, ProductID) -- Primary key on two columns
+
+
+<br>Best Practices:<br>
+<br>Choose Meaningful Names:  Use clear and descriptive names for your primary key columns (e.g., CustomerID, OrderID).
+<br>Consider Surrogate Keys:  In many cases, it's a good idea to use a surrogate key (a generated, unique value like an auto-incrementing integer) as your primary key, especially if you don't have a natural, unchanging unique identifier within your data.
+]]></description><link>SQL-SERVER\4. WORKING WITH CONSTRAINTS\3. PRIMARY KEY.html</link><guid isPermaLink="false">SQL-SERVER/4. WORKING WITH CONSTRAINTS/3. PRIMARY KEY.md</guid><pubDate>Thu, 11 Jul 2024 18:24:36 GMT</pubDate></item><item><title><![CDATA[4.DEFAULT]]></title><description><![CDATA[ 
+ <br>All right, let's explore DEFAULT constraints in Microsoft SQL Server!<br>What is a DEFAULT Constraint?<br>
+<br>
+Purpose: The DEFAULT constraint in SQL Server lets you automatically assign a default value to a column if no explicit value is provided during an INSERT operation. This can be incredibly helpful for ensuring data consistency and handling situations where a value might not always be available at the time of insertion.
+
+<br>
+Syntax:
+CREATE TABLE table_name (
+    column_name data_type CONSTRAINT constraint_name DEFAULT default_value, 
+    ...
+); 
+
+
+<br>
+Example:
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(255) NOT NULL,
+    Category VARCHAR(50) CONSTRAINT DF_Category DEFAULT 'General',  -- Default Category
+    Price DECIMAL (10, 2)
+);
+
+ In this example: 
+
+<br>If you insert a new product into the Products table without specifying a Category, SQL Server will automatically assign the value 'General' to the Category column.
+
+
+<br>Types of Default Values:<br>
+<br>
+Constants: You can use constant values like numbers, strings, or dates:
+DEFAULT 100    -- Integer
+DEFAULT 'Unknown'  -- String
+DEFAULT GETDATE() -- Current date
+
+
+<br>
+Functions: SQL Server functions can be used to generate default values, including:
+DEFAULT GETDATE()      -- Current date and time 
+DEFAULT NEWID()       -- Uniqueidentifier (GUID)
+DEFAULT USER_NAME()   -- Current login name
+
+
+<br>Key Points to Remember:<br>
+<br>
+Non-Nullability: DEFAULT constraints don't imply NOT NULL. If you want a column to be both required and have a default value, you need to use both NOT NULL and DEFAULT constraints.
+
+<br>
+Overriding Defaults: You can always provide an explicit value during an INSERT, which will override the defined default value.
+
+<br>
+Altering Defaults: You can modify an existing DEFAULT constraint using the ALTER TABLE statement: 
+ALTER TABLE Products 
+DROP CONSTRAINT DF_Category;  -- Remove old default
+
+ALTER TABLE Products
+ADD CONSTRAINT DF_Category DEFAULT 'Uncategorized' -- Add new default
+
+
+<br>Benefits of DEFAULT Constraints:<br>
+<br>Data Consistency: Ensures a consistent value is used when one isn't explicitly provided.
+<br>Simplified Inserts:  Reduces the amount of data you need to specify during INSERT operations.
+<br>Code Readability:  Makes your table definitions more self-documenting by explicitly showing default values.
+<br>Let me know if you'd like to see more examples or want to explore how to combine DEFAULT constraints with other constraints! ]]></description><link>SQL-SERVER\4. WORKING WITH CONSTRAINTS\4.DEFAULT.html</link><guid isPermaLink="false">SQL-SERVER/4. WORKING WITH CONSTRAINTS/4.DEFAULT.md</guid><pubDate>Thu, 11 Jul 2024 18:25:33 GMT</pubDate></item><item><title><![CDATA[5. CHECK]]></title><description><![CDATA[ 
+ <br>You got it! Let's discuss CHECK constraints in SQL Server.<br>What is a CHECK Constraint?<br>
+<br>
+Purpose: CHECK constraints are your way of enforcing domain integrity in a SQL Server table. They allow you to specify rules or conditions that data values in a column must satisfy. If an INSERT or UPDATE statement attempts to violate a CHECK constraint, the operation is prevented, and an error is raised.
+
+<br>
+Syntax:
+CREATE TABLE table_name (
+    column_name data_type CONSTRAINT constraint_name CHECK (condition),
+    ...
+); 
+
+
+<br>Examples:<br>
+<br>
+Age Restriction: Let's say you have an Employees table, and you want to ensure that all employees are 18 years or older:
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    Age INT CONSTRAINT CK_EmployeeAge CHECK (Age &gt;= 18) 
+);
+
+Now, if you try to insert an employee record with an Age less than 18, SQL Server will reject the insertion and give you an error.
+
+<br>
+Value Range: You might want to limit a discount percentage to be between 0 and 50:
+CREATE TABLE Discounts (
+    DiscountID INT PRIMARY KEY,
+    DiscountName VARCHAR(255),
+    DiscountPercent DECIMAL (4, 2) CONSTRAINT CK_DiscountRange CHECK (DiscountPercent BETWEEN 0.00 AND 50.00)
+);
+
+
+<br>
+Specific Values:  You can enforce that a Status column only accepts 'Active', 'Inactive', or 'Pending':
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    OrderStatus VARCHAR(20) CONSTRAINT CK_OrderStatus CHECK (OrderStatus IN ('Active', 'Inactive', 'Pending'))
+); 
+
+
+<br>Key Points to Remember:<br>
+<br>Boolean Expressions: The condition in a CHECK constraint must evaluate to a boolean (TRUE or FALSE) result.
+<br>Logical Operators: You can use logical operators like AND, OR, and NOT to create more complex conditions.
+<br>Functions: You can use SQL Server built-in functions within CHECK constraints (e.g., to validate string lengths, date ranges, etc.). 
+<br>Error Messages: By default, SQL Server provides a generic error message when a CHECK constraint is violated. You can customize the error message for better clarity. 
+<br>Benefits of CHECK Constraints:<br>
+<br>Data Integrity: Enforces business rules and prevents invalid data from entering your tables.
+<br>Improved Data Quality: Helps ensure that the data in your database is accurate, consistent, and meaningful.
+<br>Clearer Business Logic: Makes the rules governing your data directly visible in the database schema. 
+<br>Let me know if you'd like to see more examples, explore complex scenarios, or have any other questions about CHECK constraints! ]]></description><link>SQL-SERVER\4. WORKING WITH CONSTRAINTS\5. CHECK.html</link><guid isPermaLink="false">SQL-SERVER/4. WORKING WITH CONSTRAINTS/5. CHECK.md</guid><pubDate>Fri, 30 Aug 2024 04:02:17 GMT</pubDate></item><item><title><![CDATA[6. Foreign Key]]></title><description><![CDATA[ 
+ <br>You got it! Let's explore Foreign Key constraints in SQL Server.<br>What is a Foreign Key Constraint?<br>
+<br>
+Purpose: Foreign keys are fundamental to relational database design. They establish and enforce referential integrity between tables. 
+
+<br>
+Parent-Child Relationship: Think of it like this:
+
+<br>The parent table holds the primary data (e.g., Customers).
+<br>The child table contains data related to the parent table (e.g., Orders).  Each order is linked back to a specific customer.
+
+
+<br>
+The Link: A foreign key constraint in the child table defines a column (or set of columns) that references the primary key column in the parent table. This creates the link.
+
+<br>Syntax:<br>CREATE TABLE child_table_name (
+    ...,  -- Other columns in the child table 
+    foreign_key_column data_type,
+    CONSTRAINT constraint_name 
+        FOREIGN KEY (foreign_key_column) REFERENCES parent_table_name (primary_key_column),
+    ...
+);
+<br>Example:<br>Let's say you have these tables:<br>
+<br>
+Customers (Parent Table)
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    FirstName VARCHAR(255),
+    ...
+);
+
+
+<br>
+Orders (Child Table):
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    ...,
+    CONSTRAINT FK_Orders_Customers -- Constraint name (optional but recommended)
+        FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID)
+);
+
+
+<br>How It Works:<br>
+<br>
+Referential Integrity: The FK_Orders_Customers constraint in the Orders table enforces these rules:<br>
+* You cannot insert an order with a CustomerID that does not exist in the Customers table.
+
+<br>You cannot delete a customer from the Customers table if there are still related orders in the Orders table.
+
+
+<br>
+Data Integrity:  Foreign keys prevent orphan records (child records without a corresponding parent) and ensure that relationships between your tables remain valid.
+
+<br>Important Considerations:<br>
+<br>
+Cascading Actions:  You can specify what happens to related child table rows when a parent row is deleted or updated using:
+
+<br>ON DELETE CASCADE:  Automatically deletes related child rows when the parent row is deleted.
+<br>ON UPDATE CASCADE:  Automatically updates the foreign key values in child rows when the primary key value in the parent row is updated.
+
+
+<br>
+Choosing Data Types: The data types of the foreign key column and the referenced primary key column must be compatible.
+
+<br>Benefits of Foreign Keys:<br>
+<br>Data Integrity Enforcement: Maintains valid relationships between tables.
+<br>Prevent Accidental Data Loss: Helps prevent unintentional deletion or modification of related data.
+<br>Improved Data Consistency: Ensures the database reflects real-world relationships accurately.
+]]></description><link>SQL-SERVER\4. WORKING WITH CONSTRAINTS\6. Foreign Key.html</link><guid isPermaLink="false">SQL-SERVER/4. WORKING WITH CONSTRAINTS/6. Foreign Key.md</guid><pubDate>Fri, 30 Aug 2024 03:42:22 GMT</pubDate></item><item><title><![CDATA[WORKING WITH CONSTRAINTS]]></title><description><![CDATA[ 
+ <br><a data-href="1. UNIQUE" href="SQL-SERVER\4. WORKING WITH CONSTRAINTS\1. UNIQUE.html" class="internal-link" target="_self" rel="noopener nofollow">1. UNIQUE</a><br>
+<a data-href="2. NOT NULL" href="SQL-SERVER\4. WORKING WITH CONSTRAINTS\2. NOT NULL.html" class="internal-link" target="_self" rel="noopener nofollow">2. NOT NULL</a><br>
+<a data-href="3. PRIMARY KEY" href="SQL-SERVER\4. WORKING WITH CONSTRAINTS\3. PRIMARY KEY.html" class="internal-link" target="_self" rel="noopener nofollow">3. PRIMARY KEY</a><br>
+<a data-href="4.DEFAULT" href="SQL-SERVER\4. WORKING WITH CONSTRAINTS\4.DEFAULT.html" class="internal-link" target="_self" rel="noopener nofollow">4.DEFAULT</a><br>
+<a data-href="5. CHECK" href="SQL-SERVER\4. WORKING WITH CONSTRAINTS\5. CHECK.html" class="internal-link" target="_self" rel="noopener nofollow">5. CHECK</a><br>
+<a data-href="6. Foreign Key" href="SQL-SERVER\4. WORKING WITH CONSTRAINTS\6. Foreign Key.html" class="internal-link" target="_self" rel="noopener nofollow">6. Foreign Key</a>]]></description><link>SQL-SERVER\4. WORKING WITH CONSTRAINTS\WORKING WITH CONSTRAINTS.html</link><guid isPermaLink="false">SQL-SERVER/4. WORKING WITH CONSTRAINTS/WORKING WITH CONSTRAINTS.md</guid><pubDate>Mon, 23 Dec 2024 16:20:44 GMT</pubDate></item><item><title><![CDATA[1. Introduction]]></title><description><![CDATA[ 
+ <br>Normalization is a crucial database design technique in MS SQL (and any relational database system) that aims to organize data efficiently and reduce redundancy. It involves dividing large tables into smaller, well-structured tables and defining relationships between them. <br>Why Normalize?<br>Normalization offers several benefits:<br>
+<br>Data Integrity: By minimizing data duplication, normalization ensures consistency and accuracy across the database. 
+<br>Data Efficiency: It reduces storage space by eliminating redundant data.
+<br>Data Flexibility: Normalized tables are easier to modify and update without impacting other parts of the database.
+<br>Data Scalability: Well-normalized databases are more scalable and perform better as data volume grows.
+<br>Normalization Levels (Normal Forms):<br>Normalization is a step-by-step process with different levels called normal forms. Each normal form builds upon the previous one, further refining the data structure. The common normal forms are:<br>
+<br>1st Normal Form (1NF): Eliminates repeating groups within a table. Each column should contain atomic values, and there should be no repeating sets of columns.
+<br>2nd Normal Form (2NF): Builds upon 1NF and removes redundant data that depends on only part of a composite key (a key consisting of multiple columns). Every non-key attribute must be fully dependent on the entire primary key.
+<br>3rd Normal Form (3NF): Builds upon 2NF and removes data that depends on non-key attributes. Every non-key attribute must be directly dependent on the primary key and not on other non-key attributes.
+<br>Boyce-Codd Normal Form (BCNF): A stricter version of 3NF, it addresses some scenarios where 3NF might still leave room for redundancy. It ensures that every determinant (an attribute that determines other attributes) is a candidate key.
+<br>4th Normal Form (4NF): Addresses situations with multi-valued dependencies. It requires that no table have more than one multi-valued dependency that is not a functional dependency.
+<br>5th Normal Form (5NF): Also known as Project-Join Normal Form (PJ/NF), it addresses cases where a table can be decomposed into smaller tables without loss of information but cannot be reconstructed through natural joins. It's considered the highest level of normalization and is rarely implemented in practice.
+<br>In this guide, we will explore each normal form in detail, understand the rules associated with them, and learn how to apply them to design efficient and robust databases in MS SQL.<br>Note: While achieving higher normal forms is generally desirable, it's important to strike a balance based on specific application needs. Sometimes, denormalization (intentionally introducing redundancy) might be necessary for performance optimization in certain scenarios.<br>Let's begin our journey into the world of normalization and learn how to create well-structured and efficient databases in MS SQL! ]]></description><link>SQL-SERVER\5. NORMALIZATION\1. Introduction.html</link><guid isPermaLink="false">SQL-SERVER/5. NORMALIZATION/1. Introduction.md</guid><pubDate>Mon, 09 Sep 2024 17:38:42 GMT</pubDate></item><item><title><![CDATA[2. First Normal Form (1NF)]]></title><description><![CDATA[ 
+ <br><br>Introduction<br>First Normal Form (1NF) is the first step in organizing your data efficiently in a database. Think of it like organizing your toys – you wouldn't want to throw all your action figures, building blocks, and puzzles into one giant box, right? 1NF is about separating different types of information into their own containers (tables).<br>Key Idea: No Repeating Groups<br>The core principle of 1NF is to avoid repeating groups of information within a single table. Let's see this with a simple example:<br>Example 1: Vehicles (Not in 1NF)<br>Imagine you want to store information about vehicles, including their features:<br><br>Problem: The "Features" column lumps together multiple pieces of information. This makes it hard to:<br>
+<br>Search for vehicles with specific features (e.g., find all vehicles with engines).
+<br>Update information about a single feature (e.g., if a new type of airbag is introduced).
+<br>Example 2: Vehicles (in 1NF)<br>To achieve 1NF, we separate the features into individual columns:<br><br>Benefits:<br>
+<br>Clearer organization: Each feature has its own column, making the data easier to understand.
+<br>Easier searching: We can easily find vehicles with specific features (e.g., WHERE Engine = 'Yes').
+<br>Simplified updates: We can update information about a single feature without affecting other data.
+<br>Another Simple Example: Books<br>Not in 1NF:<br><br>Problem: The "Authors" column can contain multiple authors, creating a repeating group.<br>In 1NF:<br><br>Benefits:<br>
+<br>We can now easily search for books by a specific author.
+<br>Adding a new author to a book doesn't require changing the entire "Authors" column.
+<br>In Conclusion<br>1NF is all about breaking down complex information into smaller, manageable pieces. By eliminating repeating groups, you create a more organized and efficient database that's easier to work with.  Think of it as the first step towards building a well-structured and robust database! ]]></description><link>SQL-SERVER\5. NORMALIZATION\2. First Normal Form (1NF).html</link><guid isPermaLink="false">SQL-SERVER/5. NORMALIZATION/2. First Normal Form (1NF).md</guid><pubDate>Wed, 11 Sep 2024 03:39:02 GMT</pubDate></item><item><title><![CDATA[3. Second Normal Form (2NF)]]></title><description><![CDATA[ 
+ <br>Introduction<br>Second Normal Form (2NF) builds upon the foundation of First Normal Form (1NF) and further refines the structure of your database tables. It aims to eliminate redundant data that arises from partial dependencies on a composite key.<br>Prerequisites for 2NF<br>A table must satisfy the following conditions to be considered in 2NF:<br>
+<br>It must be in 1NF:  This means it has no repeating groups and each column contains atomic values.
+<br>It must have a composite key:  A composite key is a primary key that consists of two or more columns.
+<br>Understanding Partial Dependencies<br>A partial dependency occurs when a non-key attribute (a column that is not part of the primary key) depends on only part of the composite key, rather than the entire key.<br>Example: Orders Table (Not in 2NF)<br>Consider an Orders table that stores information about customer orders, including order details and customer information:<br><br>Problems with the Unnormalized Table:<br>
+<br>Partial Dependency: The CustomerName and CustomerAddress attributes depend only on the CustomerID (part of the composite key OrderID, ProductID), not on the entire key.
+<br>Data Redundancy: Customer information is repeated for each product they order.
+<br>Data Inconsistency: If a customer changes their address, it needs to be updated in multiple rows.
+<br>Example: Normalized Tables (in 2NF)<br>To achieve 2NF, we split the Orders table into two tables: Orders and Customers.<br>Orders Table:<br><br>Customers Table:<br><br>Benefits of 2NF:<br>
+<br>Eliminates Partial Dependencies: Customer information is now stored separately in the Customers table, removing the partial dependency on CustomerID.
+<br>Reduces Data Redundancy: Customer information is stored only once.
+<br>Improves Data Integrity: Changes to customer information only need to be made in one place.
+<br>Conclusion<br>Second Normal Form builds upon 1NF and eliminates redundant data caused by partial dependencies on composite keys. By achieving 2NF, you further improve the efficiency, integrity, and maintainability of your database. ]]></description><link>SQL-SERVER\5. NORMALIZATION\3. Second Normal Form (2NF).html</link><guid isPermaLink="false">SQL-SERVER/5. NORMALIZATION/3. Second Normal Form (2NF).md</guid><pubDate>Wed, 11 Sep 2024 03:54:39 GMT</pubDate></item><item><title><![CDATA[4. Third Normal Form (3NF)]]></title><description><![CDATA[ 
+ <br>Introduction<br>Third Normal Form (3NF) is a further refinement of database normalization, building upon the principles of 1NF and 2NF. It aims to eliminate transitive dependencies, where a non-key attribute depends on another non-key attribute rather than directly on the primary key.<br>Prerequisites for 3NF<br>A table must satisfy the following conditions to be considered in 3NF:<br>
+<br>It must be in 2NF: This means it has no partial dependencies on a composite key.
+<br>It must have no transitive dependencies: No non-key attribute should depend on another non-key attribute.
+<br>Understanding Transitive Dependencies<br>A transitive dependency occurs when a non-key attribute depends on another non-key attribute, which in turn depends on the primary key.<br>Example: Products Table (Not in 3NF)<br>Consider a Products table that stores information about products, including their category and category discount rate:<br><br>Problems with the Unnormalized Table:<br>
+<br>Transitive Dependency: The CategoryDiscountRate attribute depends on the Category attribute, which in turn depends on the ProductID (primary key).
+<br>Data Redundancy: The discount rate for each category is repeated for each product in that category.
+<br>Data Inconsistency: If the discount rate for a category changes, it needs to be updated in multiple rows.
+<br>Example: Normalized Tables (in 3NF)<br>To achieve 3NF, we split the Products table into two tables: Products and Categories.<br>Products Table:<br><br>Categories Table:<br><br>Benefits of 3NF:<br>
+<br>Eliminates Transitive Dependencies: The CategoryDiscountRate is now directly associated with the Category in a separate table.
+<br>Reduces Data Redundancy: Category discount rates are stored only once.
+<br>Improves Data Integrity: Changes to category discount rates only need to be made in one place.
+<br>Conclusion<br>Third Normal Form builds upon 2NF and eliminates redundant data caused by transitive dependencies. By achieving 3NF, you further improve the efficiency, integrity, and maintainability of your database, ensuring that data is stored logically and efficiently. ]]></description><link>SQL-SERVER\5. NORMALIZATION\4. Third Normal Form (3NF).html</link><guid isPermaLink="false">SQL-SERVER/5. NORMALIZATION/4. Third Normal Form (3NF).md</guid><pubDate>Tue, 10 Sep 2024 08:07:22 GMT</pubDate></item><item><title><![CDATA[NORMALIZATION]]></title><description><![CDATA[ 
+ <br><a data-tooltip-position="top" aria-label="SQL-SERVER/5. NORMALIZATION/1. Introduction" data-href="SQL-SERVER/5. NORMALIZATION/1. Introduction" href="SQL-SERVER\5. NORMALIZATION\1. Introduction.html" class="internal-link" target="_self" rel="noopener nofollow">1. Introduction</a><br>
+<a data-href="2. First Normal Form (1NF)" href="SQL-SERVER\5. NORMALIZATION\2. First Normal Form (1NF).html" class="internal-link" target="_self" rel="noopener nofollow">2. First Normal Form (1NF)</a><br>
+<a data-href="3. Second Normal Form (2NF)" href="SQL-SERVER\5. NORMALIZATION\3. Second Normal Form (2NF).html" class="internal-link" target="_self" rel="noopener nofollow">3. Second Normal Form (2NF)</a><br>
+<a data-href="4. Third Normal Form (3NF)" href="SQL-SERVER\5. NORMALIZATION\4. Third Normal Form (3NF).html" class="internal-link" target="_self" rel="noopener nofollow">4. Third Normal Form (3NF)</a>]]></description><link>SQL-SERVER\5. NORMALIZATION\NORMALIZATION.html</link><guid isPermaLink="false">SQL-SERVER/5. NORMALIZATION/NORMALIZATION.md</guid><pubDate>Mon, 23 Dec 2024 16:21:21 GMT</pubDate></item><item><title><![CDATA[1.  SQL Views]]></title><description><![CDATA[ 
+ <br> SQL Views, including their introduction and key advantages.<br>What is a View in SQL?<br>Think of a view as a virtual table. It doesn't physically store data like a regular table. Instead, it's a stored SQL query that, when accessed, presents data derived from one or more underlying base tables.  <br>
+<br>Analogy: Imagine a window (the view) that lets you see a specific, curated arrangement of items (data) from a larger warehouse (your database tables).
+<br>Creating a View:<br>You create a view using the CREATE VIEW statement, providing it with a name and the SELECT query that defines its structure and data:<br>CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table1  -- Can join other tables if needed
+WHERE condition; 
+<br>Advantages of Using Views:<br>
+<br>
+Simplified Complex Queries:
+
+<br>Views hide the complexity of underlying joins, subqueries, or calculations, making it easier for users to access frequently needed data.
+
+
+<br>
+Data Security: 
+
+<br>Restricting Access:  You can grant users access only to views, shielding sensitive columns or tables from direct access.
+<br>Column-Level Security: Views can select a subset of columns from the base tables, so users only see the data they need.
+
+
+<br>
+Data Consistency:
+
+<br>Views ensure that all users see a consistent snapshot of data, even if the underlying tables are being updated concurrently.
+
+
+<br>
+Logical Data Abstraction: 
+
+<br>Views can represent a specific business perspective on your data, making it more understandable and easier to work with. For example, you could have a view called ActiveCustomers that only shows customers with recent orders.
+
+
+<br>
+Code Reusability:
+
+<br>Once defined, views can be used in multiple queries, stored procedures, or even by other views, reducing code duplication and promoting consistency.
+
+
+<br>Common Use Cases:<br>
+<br>Reporting and Analytics:  Views are frequently used to create simplified data sets for generating reports and dashboards.
+<br>Data Security and Access Control: As mentioned, views are great for controlling access to sensitive information. 
+<br>Data Validation and Transformation: You can use views to apply data validation logic or transform data before presenting it to users.
+<br>Points to Remember:<br>
+<br>Data Modification:  While you can often update the data in base tables through a view, there are some limitations depending on the view's complexity.
+<br>Performance:  Views don't store data themselves, so each time you query a view, the underlying query is executed. However, SQL Server can often materialize views (store query results temporarily) to improve performance for frequently accessed views.
+]]></description><link>SQL-SERVER\6. IMPLEMENTING VIEWS\1.  SQL Views.html</link><guid isPermaLink="false">SQL-SERVER/6. IMPLEMENTING VIEWS/1.  SQL Views.md</guid><pubDate>Thu, 11 Jul 2024 18:39:41 GMT</pubDate></item><item><title><![CDATA[2. creating, altering, and dropping views in SQL]]></title><description><![CDATA[ 
+ <br>Okay, let's explore creating, altering, and dropping views in SQL, along with notes, sample data, an activity, and solutions.<br>Notes<br>
+<br>
+Creating Views (CREATE VIEW)
+
+<br>Purpose: Defines a view with a specified name and the underlying SELECT query that determines its structure and data.
+<br>Syntax:
+CREATE VIEW view_name AS
+SELECT column1, column2, ... 
+FROM table1 [join_type table2 ON join_condition] -- Optional joins 
+WHERE condition;  -- Optional filtering
+
+
+
+
+<br>
+Altering Views (ALTER VIEW)
+
+<br>Purpose: Modifies the definition (the SELECT statement) of an existing view.
+<br>Syntax: 
+ALTER VIEW view_name AS 
+SELECT column1, column2, ...
+FROM table1 [join_type table2 ON join_condition] -- Optional joins
+WHERE condition; -- Optional filtering
+
+
+
+
+<br>
+Dropping Views (DROP VIEW)
+
+<br>Purpose: Removes an existing view from the database.
+<br>Syntax:
+DROP VIEW view_name; 
+
+
+
+
+<br>Sample Tables (Let's use these for our activity):<br>Table: Employees<br><br>Table: Projects<br><br>Activity<br>Instructions:  Write SQL queries to accomplish the following view-related tasks.<br>
+<br>Create a view named HighEarners that lists employees with salaries greater than $60,000.
+<br>Create a view called EmployeeProjects that shows employee names and their assigned projects.
+<br>Alter the HighEarners view to include the Department column.
+<br>Create a view named SalesTeam that displays the names of employees in the Sales department.
+<br>Try to drop the Employees table (what happens?).
+<br>Create a view ProjectLeaders that lists the ProjectName and FirstName of employees managing each project.
+<br>Alter the EmployeeProjects view to only include projects started after '2023-01-01'.
+<br>Drop the SalesTeam view.
+<br>Create a view EmployeeInfo that selects all columns from the Employees table but renames EmpID to EmployeeID.
+<br>Drop all views related to the Employees table (hint: you might want to look up how to do this if you haven't done it before).
+<br>Answers<br>-- 1. Create `HighEarners` view
+CREATE VIEW HighEarners AS
+SELECT EmpID, FirstName, LastName, Salary
+FROM Employees
+WHERE Salary &gt; 60000;
+
+-- 2. Create `EmployeeProjects` view
+CREATE VIEW EmployeeProjects AS
+SELECT e.FirstName, e.LastName, p.ProjectName
+FROM Employees e
+JOIN Projects p ON e.EmpID = p.EmpID; 
+
+-- 3. Alter `HighEarners` view
+ALTER VIEW HighEarners AS
+SELECT EmpID, FirstName, LastName, Department, Salary
+FROM Employees
+WHERE Salary &gt; 60000;
+
+-- 4. Create `SalesTeam` view
+CREATE VIEW SalesTeam AS
+SELECT FirstName, LastName
+FROM Employees
+WHERE Department = 'Sales';
+
+-- 5. Try to drop `Employees` table (will result in an error)
+DROP TABLE Employees; 
+-- Error because views depend on it. 
+
+-- 6. Create `ProjectLeaders` view
+CREATE VIEW ProjectLeaders AS
+SELECT p.ProjectName, e.FirstName AS LeaderFirstName
+FROM Projects p
+JOIN Employees e ON p.EmpID = e.EmpID;
+
+-- 7. Alter `EmployeeProjects` (Note: Assuming a 'StartDate' column in 'Projects')
+-- If you don't have a 'StartDate', you can't filter by it. 
+ALTER VIEW EmployeeProjects AS
+SELECT e.FirstName, e.LastName, p.ProjectName
+FROM Employees e
+JOIN Projects p ON e.EmpID = p.EmpID
+WHERE p.StartDate &gt; '2023-01-01'; 
+
+-- 8. Drop `SalesTeam` view
+DROP VIEW SalesTeam;
+
+-- 9. Create `EmployeeInfo` view
+CREATE VIEW EmployeeInfo AS
+SELECT EmpID AS EmployeeID, FirstName, LastName, Department, Salary
+FROM Employees;
+
+-- 10. Drop all views dependent on `Employees`
+-- You'll need to find the view names (e.g., using system tables)
+-- and drop them individually, or use a script to automate this.
+-- Example (replace 'view_name' with actual view names):
+DROP VIEW view_name1, view_name2, view_name3;
+<br>If you have any other view-related challenges or want to explore more complex scenarios, just let me know! ]]></description><link>SQL-SERVER\6. IMPLEMENTING VIEWS\2. creating, altering, and dropping views in SQL.html</link><guid isPermaLink="false">SQL-SERVER/6. IMPLEMENTING VIEWS/2. creating, altering, and dropping views in SQL.md</guid><pubDate>Mon, 15 Jul 2024 10:55:49 GMT</pubDate></item><item><title><![CDATA[IMPLEMENTING VIEW]]></title><description><![CDATA[ 
+ <br><a data-href="1.  SQL Views" href="SQL-SERVER\6. IMPLEMENTING VIEWS\1.  SQL Views.html" class="internal-link" target="_self" rel="noopener nofollow">1.  SQL Views</a><br>
+<a data-href="2. creating, altering, and dropping views in SQL" href="SQL-SERVER\6. IMPLEMENTING VIEWS\2. creating, altering, and dropping views in SQL.html" class="internal-link" target="_self" rel="noopener nofollow">2. creating, altering, and dropping views in SQL</a>]]></description><link>SQL-SERVER\6. IMPLEMENTING VIEWS\IMPLEMENTING VIEW.html</link><guid isPermaLink="false">SQL-SERVER/6. IMPLEMENTING VIEWS/IMPLEMENTING VIEW.md</guid><pubDate>Mon, 23 Dec 2024 16:21:34 GMT</pubDate></item><item><title><![CDATA[1. Stored procedures in SQL Server]]></title><description><![CDATA[ 
+ <br>Working with Stored Procedures and Functions<br>What are Stored Procedures?<br>Stored procedures are pre-compiled groups of one or more SQL statements stored and executed on the database server.  Think of them as reusable mini-programs within your database.<br>Benefits of Stored Procedures<br>
+<br>Performance:  Pre-compiled for faster execution (reduced parsing overhead).
+<br>Security: Can control access to data using permissions, reducing risks associated with dynamic SQL.
+<br>Reusability:  Write once, call multiple times from different applications or parts of your code.
+<br>Maintainability: Changes made to a stored procedure are automatically reflected for all applications that use it.
+<br>Data Integrity: Help enforce business logic and data validation consistently.
+<br>Creating Stored Procedures<br>CREATE PROCEDURE procedure_name 
+    (@parameter1 datatype, @parameter2 datatype = default_value, ...)  -- Optional parameters
+AS
+BEGIN
+    -- SQL statements to be executed 
+    -- (e.g., SELECT, UPDATE, INSERT, DELETE, variable declarations, etc.)
+END;
+<br>
+<br>procedure_name: A unique name for your stored procedure.
+<br>@parameter1, @parameter2: Optional input parameters that can be passed to the stored procedure.
+<br>datatype: Data type of the parameter.
+<br>default_value:  An optional default value for a parameter.
+<br>Example<br>CREATE PROCEDURE GetCustomersByCity 
+    (@City VARCHAR(50)) 
+AS
+BEGIN
+    SELECT *
+    FROM Customers
+    WHERE City = @City; 
+END;
+<br>Executing Stored Procedures<br>EXEC procedure_name parameter1_value, parameter2_value,...; 
+-- Or
+EXECUTE procedure_name parameter1_value, parameter2_value,...; 
+<br>
+<br>Example:  EXEC GetCustomersByCity 'London';
+<br>Modifying Stored Procedures<br>
+<br>ALTER PROCEDURE:  Use the ALTER PROCEDURE statement to modify an existing stored procedure. The syntax is very similar to CREATE PROCEDURE.
+<br>Dropping Stored Procedures<br>
+<br>
+Syntax:
+DROP PROCEDURE procedure_name;
+
+
+<br>Input-Output (I/O) and Optional Parameters<br>
+<br>Input Parameters:  Values passed from your application to the stored procedure (@parameter_name). 
+<br>Output Parameters:  Values returned from the stored procedure back to your application (declared using OUTPUT keyword).
+<br>Optional Parameters: Parameters with default values. If you don't provide a value when calling the procedure, the default value is used.
+<br>Example (Output Parameter)<br>CREATE PROCEDURE GetTotalOrderValue
+    (@OrderID INT, 
+     @TotalValue DECIMAL(10,2) OUTPUT)
+AS
+BEGIN
+    SELECT @TotalValue = SUM(Price * Quantity) 
+    FROM OrderItems
+    WHERE OrderID = @OrderID;
+END;
+<br>Practical Questions (Try these out!)<br>
+<br>Create a stored procedure that takes a customer ID as input and returns all orders for that customer.
+<br>Modify the stored procedure from question 1 to also calculate and return the total value of all orders for the given customer (use an output parameter).
+<br>Create a stored procedure that inserts a new customer into the "Customers" table.  Include parameters for the customer's first name, last name, and city. The city parameter should have a default value of 'Unknown'.
+<br>Write the SQL statement to execute the stored procedure you cr6eated in question 3 to insert a new customer with the name "Alice Johnson" living in "New York".
+<br>How would you delete the stored procedure you created in question 1?
+<br>Feel free to ask if you'd like help with these questions or have other stored procedure scenarios you'd like to discuss. ]]></description><link>SQL-SERVER\7. STORED PROCEDURE\1. Stored procedures in SQL Server.html</link><guid isPermaLink="false">SQL-SERVER/7. STORED PROCEDURE/1. Stored procedures in SQL Server.md</guid><pubDate>Wed, 25 Sep 2024 04:28:28 GMT</pubDate></item><item><title><![CDATA[STORED PROCEDURE]]></title><description><![CDATA[ 
+ <br><a data-href="1. Stored procedures in SQL Server" href="SQL-SERVER\7. STORED PROCEDURE\1. Stored procedures in SQL Server.html" class="internal-link" target="_self" rel="noopener nofollow">1. Stored procedures in SQL Server</a>]]></description><link>SQL-SERVER\7. STORED PROCEDURE\STORED PROCEDURE.html</link><guid isPermaLink="false">SQL-SERVER/7. STORED PROCEDURE/STORED PROCEDURE.md</guid><pubDate>Mon, 23 Dec 2024 16:22:07 GMT</pubDate></item><item><title><![CDATA[1. Implementing Triggers]]></title><description><![CDATA[ 
+ <br>Introduction<br>
+<br>Automated Actions: Triggers are special stored procedures that automatically execute (or "fire") when specific data modification events occur on a table. 
+<br>Events:  The events that can trigger a trigger include:
+
+<br>INSERT: A new row is inserted into the table.
+<br>UPDATE: An existing row is modified.
+<br>DELETE: A row is removed from the table.
+
+
+<br>Uses:
+
+<br>Auditing and Logging:  Track data changes for security or historical purposes.
+<br>Maintaining Data Integrity: Enforce complex business rules that go beyond simple constraints. 
+<br>Derived Data: Automatically update calculated values in related tables.
+
+
+<br>Constraints vs. Triggers<br>
+<br>
+Constraints:
+
+<br>Enforce data integrity rules at the column or table level.
+<br>Relatively simple rules (e.g., data types, unique values, foreign key relationships). 
+<br>Checked before a data modification operation is committed.
+
+
+<br>
+Triggers:
+
+<br>Provide more flexibility for complex actions and logic.
+<br>Can access data in other tables and perform multiple operations.
+<br>Execute after the triggering data modification is successful.
+
+
+<br>Creating Triggers<br>CREATE TRIGGER trigger_name
+ON table_name
+[FOR | AFTER | INSTEAD OF]  [INSERT | UPDATE | DELETE]
+AS
+BEGIN
+    -- SQL statements to execute 
+END; 
+<br>
+<br>trigger_name:  Give your trigger a descriptive name.
+<br>table_name: The table associated with the trigger.
+<br>FOR | AFTER | INSTEAD OF:
+
+<br>FOR:  (SQL Server only, similar to AFTER)
+<br>AFTER: The trigger executes after the triggering event (most common).
+<br>INSTEAD OF:  The trigger executes in place of the triggering event (used for more advanced scenarios like views).
+
+
+<br>INSERT | UPDATE | DELETE: Specify one or more triggering events. 
+<br>BEGIN...END:  The block containing the T-SQL code for the trigger actions.
+<br>Example (AFTER Trigger)<br>-- Log changes to the 'Products' table in an audit table
+CREATE TRIGGER trg_Products_Audit
+ON Products
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    -- Insert a record into the 'Products_Audit' table
+    INSERT INTO Products_Audit (ProductID, Action, ChangeDate)
+    SELECT  
+        ISNULL(i.ProductID, d.ProductID),  -- Get ProductID from inserted or deleted tables
+        CASE 
+            WHEN i.ProductID IS NOT NULL THEN 'INSERT'
+            WHEN u.ProductID IS NOT NULL THEN 'UPDATE'
+            ELSE 'DELETE'
+        END AS Action,
+        GETDATE() AS ChangeDate
+    FROM inserted i  -- Special table for INSERT/UPDATE
+    FULL OUTER JOIN deleted d ON i.ProductID = d.ProductID
+    FULL OUTER JOIN updated u ON i.ProductID = u.ProductID; 
+END; 
+<br>Altering Triggers<br>
+<br>You can modify an existing trigger using the ALTER TRIGGER statement, which follows the same basic syntax as CREATE TRIGGER.
+<br>Dropping Triggers<br>DROP TRIGGER trigger_name; 
+<br>Important Points:<br>
+<br>Transaction Control:  Triggers execute within the same transaction as the triggering statement. If the trigger fails, the entire transaction is rolled back.
+<br>Recursive Triggers:  Be careful to avoid creating recursive triggers, where a trigger's actions cause the same trigger to fire again, leading to an infinite loop.
+<br>Performance:  While triggers are powerful, excessive or poorly designed triggers can negatively impact database performance.
+<br>Let me know if you would like me to elaborate on any of the trigger types (FOR/AFTER/INSTEAD OF) or if you have any specific trigger scenarios you want to discuss! ]]></description><link>SQL-SERVER\8. TRIGGERS\1. Implementing Triggers.html</link><guid isPermaLink="false">SQL-SERVER/8. TRIGGERS/1. Implementing Triggers.md</guid><pubDate>Sat, 28 Sep 2024 06:43:51 GMT</pubDate></item><item><title><![CDATA[TRIGGERS]]></title><description><![CDATA[ 
+ <br><a data-href="1. Implementing Triggers" href="SQL-SERVER\8. TRIGGERS\1. Implementing Triggers.html" class="internal-link" target="_self" rel="noopener nofollow">1. Implementing Triggers</a>]]></description><link>SQL-SERVER\8. TRIGGERS\TRIGGERS.html</link><guid isPermaLink="false">SQL-SERVER/8. TRIGGERS/TRIGGERS.md</guid><pubDate>Mon, 23 Dec 2024 16:22:23 GMT</pubDate></item><item><title><![CDATA[1. Working with Indexes]]></title><description><![CDATA[ 
+ <br>Working with Indexes<br>What are Indexes?<br>Think of an index in a database like the index at the back of a book. It speeds up data retrieval by providing a structured lookup mechanism. Without indexes, the database would have to scan every row of a table to find the data you need, which can be extremely slow for large tables.<br>Types of Indexes<br>
+<br>
+Clustered Index:
+
+<br>Definition: A clustered index defines the physical order in which data is stored in a table. 
+<br>Uniqueness:  A table can have only one clustered index because it dictates the actual sort order of the data.
+<br>Analogy: Imagine arranging all the pages in a book alphabetically by last name. That's like a clustered index.
+<br>Ideal for: Queries that retrieve data based on a range of values, or when frequently searching for rows by their primary key.
+
+
+<br>
+Non-Clustered Index: 
+
+<br>Definition: A non-clustered index creates a separate structure from the actual table data. This structure contains the index key columns and pointers back to the actual rows in the table.
+<br>Multiple Allowed: A table can have multiple non-clustered indexes.
+<br>Analogy: Think of the index at the back of a book that lists important keywords and their page numbers. 
+<br>Ideal for: Columns frequently used in WHERE clauses (filters), JOIN conditions, or ORDER BY clauses, especially when the columns contain a wide variety of values.
+
+
+<br>Creating Indexes<br>
+<br>
+General Syntax:
+CREATE [UNIQUE] INDEX index_name
+ON table_name (column1 [ASC|DESC], column2 [ASC|DESC], ...); 
+
+
+<br>UNIQUE: (Optional) Enforces uniqueness of the index key.
+<br>index_name:  Give your index a descriptive name.
+<br>table_name:  The table you're creating the index on.
+<br>column1, column2,...: The column(s) to include in the index.
+
+
+<br>
+Creating a Clustered Index: 
+CREATE CLUSTERED INDEX IX_Customers_City 
+ON Customers (City);
+
+
+<br>
+Creating a Non-Clustered Index:
+CREATE INDEX IX_Orders_OrderDate
+ON Orders (OrderDate DESC); 
+
+
+<br>Dropping Indexes<br>
+<br>
+Syntax:
+DROP INDEX table_name.index_name;
+
+
+<br>Example: DROP INDEX Customers.IX_Customers_City;
+
+
+<br>Important Considerations:<br>
+<br>Performance Trade-offs: Indexes improve query performance but can slightly slow down data insertions and updates because the index needs to be updated as well. 
+<br>Selectivity:  Indexes are most effective on columns with high selectivity (many distinct values). 
+<br>Index Design: Choosing the right columns and index types depends on your workload (the most frequent queries and data modification patterns in your application).
+<br>Let me know if you'd like more detailed examples, explanations of index tuning, or want to explore other index-related concepts! ]]></description><link>SQL-SERVER\9. INDEX\1. Working with Indexes.html</link><guid isPermaLink="false">SQL-SERVER/9. INDEX/1. Working with Indexes.md</guid><pubDate>Mon, 09 Sep 2024 17:36:13 GMT</pubDate></item><item><title><![CDATA[SQL INDEX]]></title><description><![CDATA[ 
+ <br><a data-href="1. Working with Indexes" href="SQL-SERVER\9. INDEX\1. Working with Indexes.html" class="internal-link" target="_self" rel="noopener nofollow">1. Working with Indexes</a>]]></description><link>SQL-SERVER\9. INDEX\SQL INDEX.html</link><guid isPermaLink="false">SQL-SERVER/9. INDEX/SQL INDEX.md</guid><pubDate>Mon, 23 Dec 2024 16:22:29 GMT</pubDate></item><item><title><![CDATA[1. LOGIN vs USER in SQL Server]]></title><description><![CDATA[ 
+ <br><br>
+<br>Definition: A&nbsp;LOGIN&nbsp;is an identity that allows someone to connect to the SQL Server instance.
+<br>Purpose: It is like a door key to the building (SQL Server). Without a login, you can't enter the building.
+<br>Example: Think of a login as a username and password you use to log into your computer or a website.
+<br><br>
+<br>Definition: A&nbsp;USER&nbsp;is an identity that allows someone to access a specific database within the SQL Server instance.
+<br>Purpose: It is like a key to a specific room inside the building (database). Without a user, you can't enter the room.
+<br>Example: Once you're logged into your computer (login), you might need a specific account to access a particular application or folder (user).
+<br><br>
+<br>
+Scope:
+
+<br>LOGIN: At the server level. It allows access to the SQL Server instance.
+<br>USER: At the database level. It allows access to a specific database within the SQL Server instance.
+
+
+<br>
+Creation:
+
+<br>LOGIN: Created using the&nbsp;CREATE LOGIN&nbsp;statement.
+<br>USER: Created using the&nbsp;CREATE USER&nbsp;statement, and it is associated with a login.
+
+
+<br>
+Authentication:
+
+<br>LOGIN: Handles authentication (verifying who you are).
+<br>USER: Handles authorization (what you are allowed to do within the database)
+
+
+]]></description><link>SQL-SERVER\10. DATA CONTROL LANGUAGE (DCL)\1. LOGIN vs USER in SQL Server.html</link><guid isPermaLink="false">SQL-SERVER/10. DATA CONTROL LANGUAGE (DCL)/1. LOGIN vs USER in SQL Server.md</guid><pubDate>Mon, 30 Sep 2024 17:27:29 GMT</pubDate></item><item><title><![CDATA[2. Creating Users & Roles]]></title><description><![CDATA[ 
+ <br><br>This note provides a detailed guide on how to manage permissions in Microsoft SQL Server. We'll cover the GRANT, DENY, and REVOKE statements and demonstrate their usage with examples.<br>1. GRANT Statement:<br>The GRANT statement is used to bestow specific permissions to a principal (user, group, or role).<br>Syntax:<br>GRANT permission_type
+ON securable
+TO principal;
+<br>
+<br>permission_type: The type of permission being granted (e.g., SELECT, INSERT, EXECUTE).
+<br>securable: The object on which the permission is being granted (e.g., table, view, stored procedure).
+<br>principal: The user, group, or role receiving the permission.
+<br>Example:<br>-- Grant SELECT permission on the 'Customers' table to user 'john_doe'
+GRANT SELECT
+ON Customers
+TO john_doe;
+
+-- Grant EXECUTE permission on the stored procedure 'usp_GetCustomerOrders' to the 'Sales' role
+GRANT EXECUTE
+ON usp_GetCustomerOrders
+TO Sales;
+<br>2. DENY Statement:<br>The DENY statement explicitly denies a specific permission to a principal. It overrides any granted permissions.<br>Syntax:<br>DENY permission_type
+ON securable
+TO principal;
+<br>Example:<br>-- Deny UPDATE permission on the 'Products' table to user 'jane_doe'
+DENY UPDATE
+ON Products
+TO jane_doe;
+<br>3. REVOKE Statement:<br>The REVOKE statement removes previously granted or denied permissions from a principal.<br>Syntax:<br>REVOKE permission_type
+ON securable
+FROM principal;
+<br>Example:<br>-- Revoke SELECT permission on the 'Orders' table from user 'john_doe'
+REVOKE SELECT
+ON Orders
+FROM john_doe;
+<br>Important Considerations:<br>
+<br>WITH GRANT OPTION: When granting permissions, you can include the WITH GRANT OPTION clause. This allows the recipient to grant the same permissions to other principals.
+<br>CASCADING Permissions: Permissions can be inherited through ownership chains. Be mindful of how changes to ownership can affect permissions.
+<br>Best Practices: Adhere to the principle of least privilege. Grant only the necessary permissions required for a principal to perform their tasks. Regularly review and audit permissions.
+<br>Dynamic Management Views (DMVs): Utilize DMVs like sys.database_permissions and sys.server_permissions to examine existing permissions and troubleshoot issues.
+<br>Example Scenario: Creating a User and Granting Permissions:<br>
+<br>Create a Login:
+<br>CREATE LOGIN new_user WITH PASSWORD = 'StrongPassword123!';
+<br>
+<br>Create a User in a Database:
+<br>USE MyDatabase;
+GO
+CREATE USER new_user FOR LOGIN new_user;
+<br>
+<br>Grant Permissions:
+<br>-- Grant CONNECT permission to the database
+GRANT CONNECT TO new_user;
+
+-- Grant SELECT, INSERT, UPDATE, and DELETE permissions on the 'Employees' table
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON Employees
+TO new_user;
+<br>This example illustrates the creation of a new user and the subsequent granting of database connection and table-level permissions.<br>Note:<br>Effectively managing permissions in SQL Server is crucial for maintaining database security and integrity. Understanding the GRANT, DENY, and REVOKE statements, combined with the judicious application of the principle of least privilege, ensures a robust and secure database environment. Remember to consult the official SQL Server documentation for a comprehensive understanding of all available permissions and their implications.<br><br>Roles in SQL Server provide a convenient way to group users and assign permissions collectively. This simplifies permission management and enhances security. Here's a comprehensive guide on creating roles and assigning permissions in SQL Server:<br>1. Creating Database Roles:<br>Database roles are specific to a particular database. There are two main types:<br>
+<br>Fixed Database Roles: These roles have predefined permissions and cannot be modified. Examples include db_owner, db_datareader, db_datawriter.
+<br>User-Defined Database Roles: These roles are created and customized by users, allowing for granular control over permissions.
+<br>Syntax for Creating a User-Defined Database Role:<br>CREATE ROLE role_name;
+<br>Example:<br>USE MyDatabase;
+GO
+CREATE ROLE SalesTeam;
+<br>2. Assigning Permissions to Roles:<br>After creating a role, you can assign permissions to it using the GRANT statement.<br>Syntax:<br>GRANT permission_type
+ON securable
+TO role_name;
+<br>Example:<br>-- Grant SELECT permission on the 'Customers' table to the 'SalesTeam' role
+GRANT SELECT
+ON Customers
+TO SalesTeam;
+
+-- Grant EXECUTE permission on the stored procedure 'usp_GetSalesReport' to the 'SalesTeam' role
+GRANT EXECUTE
+ON usp_GetSalesReport
+TO SalesTeam;
+<br>3. Adding Users to Roles:<br>To grant the permissions associated with a role to users, you need to add them to the role using the ALTER ROLE statement.<br>Syntax:<br>ALTER ROLE role_name ADD MEMBER user_name;
+<br>Example:<br>-- Add user 'john_doe' to the 'SalesTeam' role
+ALTER ROLE SalesTeam ADD MEMBER john_doe;
+
+-- Add user 'jane_doe' to the 'SalesTeam' role
+ALTER ROLE SalesTeam ADD MEMBER jane_doe;
+<br>Example Scenario: Creating a Role for Data Entry Clerks:<br>
+<br>Create the Role:
+<br>USE MyDatabase;
+GO
+CREATE ROLE DataEntryClerks;
+<br>
+<br>Assign Permissions:
+<br>-- Grant INSERT, UPDATE, and DELETE permissions on the 'Orders' table
+GRANT INSERT, UPDATE, DELETE
+ON Orders
+TO DataEntryClerks;
+<br>
+<br>Add Users to the Role:
+<br>ALTER ROLE DataEntryClerks ADD MEMBER clerk_user1;
+ALTER ROLE DataEntryClerks ADD MEMBER clerk_user2;
+<br>This example demonstrates creating a role for data entry clerks and granting them specific permissions on the 'Orders' table.<br>Key Considerations:<br>
+<br>Role Membership: Users can belong to multiple roles, inheriting permissions from all of them.
+<br>Nesting Roles: You can add a role as a member of another role, creating a hierarchy of permissions.
+<br>Removing Users from Roles: Use the ALTER ROLE role_name DROP MEMBER user_name; statement to remove users from roles.
+<br>Deleting Roles: Use the DROP ROLE role_name; statement to delete roles.
+<br>Best Practices:<br>
+<br>Principle of Least Privilege: Assign only the necessary permissions required for a role to perform its functions.
+<br>Regular Audits: Periodically review and audit role memberships and permissions to ensure they are still appropriate.
+<br>Documentation: Maintain clear documentation of roles, their purpose, and their associated permissions.
+<br>By leveraging roles effectively, you can streamline permission management and maintain a secure and well-organized database environment. Remember to consult the official SQL Server documentation for a complete understanding of all available options and functionalities related to roles.]]></description><link>SQL-SERVER\10. DATA CONTROL LANGUAGE (DCL)\2. Creating Users &amp; Roles.html</link><guid isPermaLink="false">SQL-SERVER/10. DATA CONTROL LANGUAGE (DCL)/2. Creating Users &amp; Roles.md</guid><pubDate>Mon, 26 Aug 2024 00:23:34 GMT</pubDate></item><item><title><![CDATA[DATA CONTROL LANGUAGE (DCL)]]></title><description><![CDATA[ 
+ <br><a data-href="1. LOGIN vs USER in SQL Server" href="SQL-SERVER\10. DATA CONTROL LANGUAGE (DCL)\1. LOGIN vs USER in SQL Server.html" class="internal-link" target="_self" rel="noopener nofollow">1. LOGIN vs USER in SQL Server</a><br>
+<a data-href="2. Creating Users &amp; Roles" href="SQL-SERVER\10. DATA CONTROL LANGUAGE (DCL)\2. Creating Users &amp; Roles.html" class="internal-link" target="_self" rel="noopener nofollow">2. Creating Users &amp; Roles</a><br>
+<a data-href="MISC. Permissions" href="SQL-SERVER\10. DATA CONTROL LANGUAGE (DCL)\MISC. Permissions.html" class="internal-link" target="_self" rel="noopener nofollow">MISC. Permissions</a>]]></description><link>SQL-SERVER\10. DATA CONTROL LANGUAGE (DCL)\DATA CONTROL LANGUAGE (DCL).html</link><guid isPermaLink="false">SQL-SERVER/10. DATA CONTROL LANGUAGE (DCL)/DATA CONTROL LANGUAGE (DCL).md</guid><pubDate>Mon, 23 Dec 2024 16:23:41 GMT</pubDate></item><item><title><![CDATA[MISC. Permissions]]></title><description><![CDATA[ 
+ <br>Categories of Permissions in SQL Server<br>
+<br>
+Object-Level Permissions: 
+
+<br>
+On Tables and Views:
+
+<br>SELECT
+<br>INSERT
+<br>UPDATE
+<br>DELETE
+<br>REFERENCES (allows creating foreign keys referencing this table/view)
+<br>ALTER (modify table/view structure)
+<br>CONTROL (all permissions, including granting permissions to others)
+<br>TAKE OWNERSHIP (change ownership of the table/view)
+
+
+<br>
+On Stored Procedures:
+
+<br>EXECUTE
+<br>ALTER 
+<br>CONTROL
+<br>TAKE OWNERSHIP 
+
+
+<br>
+On Functions (similar to stored procedures):
+
+<br>EXECUTE
+<br>ALTER
+<br>CONTROL
+<br>TAKE OWNERSHIP
+
+
+
+
+<br>
+Statement-Level Permissions (more granular):
+
+<br>CREATE TABLE
+<br>CREATE VIEW 
+<br>CREATE PROCEDURE
+<br>CREATE FUNCTION
+<br>CREATE SCHEMA (logical grouping of objects)
+<br>ALTER ANY... (allows altering objects of a certain type - e.g., ALTER ANY TABLE)
+<br>DROP ANY...  (allows dropping objects of a certain type)
+
+
+<br>
+Database-Level Permissions:
+
+<br>CREATE TABLE, CREATE VIEW, etc. (within that database)
+<br>BACKUP DATABASE
+<br>RESTORE DATABASE
+<br>CONNECT (connect to the database)
+<br>CREATE CERTIFICATE, CREATE ASY MMETRIC KEY (for security)
+
+
+<br>
+Server-Level Permissions:
+
+<br>CREATE DATABASE
+<br>CREATE LOGIN
+<br>GRANT SERVER ROLE (assign server roles)
+<br>CONTROL SERVER (highest level of privilege) 
+
+
+<br>Important Notes:<br>
+<br>Not an Exhaustive List: SQL Server has many more specific permissions. This is a general overview.
+<br>Dynamic Management Views (DMVs): You can query system DMVs like sys.database_permissions and sys.server_permissions to get detailed information about available permissions.
+<br>Context is Key: The specific permissions a user needs depend entirely on their role and the tasks they need to perform in the database system. 
+<br>Let me know if you want to explore a specific category of permissions in more detail, or if you have a particular database object in mind, and we can discuss the relevant permissions for it! ]]></description><link>SQL-SERVER\10. DATA CONTROL LANGUAGE (DCL)\MISC. Permissions.html</link><guid isPermaLink="false">SQL-SERVER/10. DATA CONTROL LANGUAGE (DCL)/MISC. Permissions.md</guid><pubDate>Tue, 01 Oct 2024 04:21:03 GMT</pubDate></item><item><title><![CDATA[1. Transact-SQL]]></title><description><![CDATA[ 
+ <br>T-SQL, short for Transact-SQL, is Microsoft's proprietary extension of the standard SQL (Structured Query Language) used for interacting with databases within the Microsoft SQL Server ecosystem. Think of it as SQL getting a powerful upgrade specifically tailored for SQL Server.<br>Here's a breakdown of T-SQL:<br>
+<br>
+Based on SQL: At its core, T-SQL incorporates all the fundamental elements of standard SQL, including commands for:
+
+<br>Data Definition Language (DDL): CREATE, ALTER, DROP for managing database objects like tables, views, and stored procedures.
+<br>Data Manipulation Language (DML): SELECT, INSERT, UPDATE, DELETE for querying and manipulating data.
+<br>Data Control Language (DCL): GRANT, REVOKE for managing user permissions and database security.
+
+
+<br>
+Microsoft Extensions: What sets T-SQL apart are the powerful extensions added by Microsoft, which significantly enhance its capabilities:
+
+<br>Control Flow Statements:  T-SQL introduces programming constructs like:
+
+<br>IF...ELSE: For conditional logic within your SQL code.
+<br>WHILE: For creating loops to execute code repeatedly.
+<br>CASE: For handling multiple conditional branches.
+
+
+<br>Variables and Data Types: T-SQL allows you to declare and use variables to store and manipulate data within your code. You'll encounter data types like INT, VARCHAR, DATETIME, and more.
+<br>Error Handling:  T-SQL provides mechanisms to gracefully handle errors using TRY...CATCH blocks, ensuring your code runs smoothly even if unexpected situations arise. 
+<br>Built-in Functions: A rich library of built-in functions expands T-SQL's functionality:
+
+<br>String Functions: LEN(), SUBSTRING(), REPLACE(), etc., for manipulating text data.
+<br>Date and Time Functions: GETDATE(), DATEADD(), DATEDIFF() for working with dates and times.
+<br>Mathematical Functions: SUM(), AVG(), MAX(), MIN(), etc., for calculations.
+
+
+<br>Stored Procedures:  These are pre-compiled sets of T-SQL statements stored and executed directly on the SQL Server, offering performance advantages and code reusability.
+
+
+<br>In a Nutshell:<br>T-SQL empowers you to go beyond basic database interactions by adding procedural programming capabilities, advanced error handling, and a wide range of built-in functions. This makes it a robust and versatile language for building complex database applications, automating tasks, and managing your SQL Server data effectively. ]]></description><link>SQL-SERVER\11. TRANSACT SQL\1. Transact-SQL.html</link><guid isPermaLink="false">SQL-SERVER/11. TRANSACT SQL/1. Transact-SQL.md</guid><pubDate>Thu, 03 Oct 2024 01:05:27 GMT</pubDate></item><item><title><![CDATA[2. Scripts and Batches in T-SQL]]></title><description><![CDATA[ 
+ <br>Understanding the Basics<br>
+<br>Scripts: In the context of SQL Server, a script is simply a set of one or more T-SQL statements that you want to execute together.  Think of it like writing down a series of instructions.
+<br>Batches: SQL Server further divides scripts into batches. Each batch is a group of statements sent to the server to be processed as a unit. Batches are separated by the GO keyword.
+<br>Declaring Variables<br>The DECLARE keyword is your friend when you need to work with variables:<br>DECLARE @variable_name data_type; 
+<br>
+<br>DECLARE:  This keyword tells SQL Server you're about to introduce a variable.
+<br>@variable_name:  Variable names in T-SQL must start with an "at" symbol (@) followed by your chosen name (alphanumeric characters and underscores are generally safe).
+<br>data_type: Specify the kind of data the variable will hold (e.g., INT, VARCHAR(50), DATETIME).
+<br>Example<br>-- Declare an integer variable to store an age
+DECLARE @age INT;
+
+-- Declare a variable to hold a name (up to 50 characters)
+DECLARE @customer_name VARCHAR(50);
+<br>Assigning Values<br>
+<br>
+SET Keyword:
+DECLARE @product_price DECIMAL(10,2); 
+SET @product_price = 29.99;
+
+
+<br>
+Direct Assignment (in DECLARE)
+DECLARE @city VARCHAR(30) = 'New York';
+
+
+<br>
+SELECT Statement (single value):
+DECLARE @max_order_id INT;
+SELECT @max_order_id = MAX(order_id) FROM Orders;
+
+
+<br>Scripts, Batches, and Variable Scope<br>
+<br>
+Scope within a Batch: Variables declared within a batch are only accessible within that batch. They cease to exist once the batch completes execution.
+DECLARE @my_number INT;
+SET @my_number = 10; 
+
+-- This will work: @my_number is visible here
+SELECT @my_number;
+
+GO -- Batch ends 
+
+-- This will cause an error: @my_number is out of scope
+SELECT @my_number;  
+
+
+<br>
+Variables Across Batches: If you need a variable accessible across multiple batches within a script, declare it outside of any batch at the very beginning.
+-- Declare @total_sales at the script level
+DECLARE @total_sales DECIMAL(12,2);
+
+-- Batch 1: Calculate total sales
+SELECT @total_sales = SUM(order_amount) 
+FROM Orders;
+
+GO
+
+-- Batch 2: Use @total_sales - it's still in scope
+PRINT 'Total Sales: $' + CAST(@total_sales AS VARCHAR); 
+GO
+
+
+<br>Key Points to Remember<br>
+<br>Use meaningful variable names for better code readability.
+<br>Choose data types that match the kind of data you'll be storing.
+<br>Be mindful of variable scope, especially when working with multiple batches within a script. 
+]]></description><link>SQL-SERVER\11. TRANSACT SQL\2. Scripts and Batches in T-SQL.html</link><guid isPermaLink="false">SQL-SERVER/11. TRANSACT SQL/2. Scripts and Batches in T-SQL.md</guid><pubDate>Mon, 30 Sep 2024 17:41:06 GMT</pubDate></item><item><title><![CDATA[3. Activity - Variables]]></title><description><![CDATA[ 
+ <br> Scenario:  An Online Store Database<br>Imagine you're working with a database for an online store. It has tables for products, customers, and orders (feel free to create simplified versions of these if you want to run the code). <br>Question 1: Calculate and Display a Discounted Price<br>
+<br>
+Task: Retrieve the price of a product with a specific product ID (let's say product ID = 5).  Apply a 15% discount to the price and display the discounted price.
+
+<br>
+Answer:
+
+<br>DECLARE @product_id INT = 5;
+DECLARE @original_price DECIMAL(10,2);
+DECLARE @discount DECIMAL(10,2) = 0.15; -- 15% discount
+DECLARE @discounted_price DECIMAL(10,2);
+
+-- Get the original price
+SELECT @original_price = price 
+FROM Products
+WHERE product_id = @product_id;
+
+-- Calculate the discounted price
+SET @discounted_price = @original_price * (1 - @discount);
+
+-- Display the result
+SELECT 'Original Price: $' + CAST(@original_price AS VARCHAR) AS original_price,
+       'Discounted Price: $' + CAST(@discounted_price AS VARCHAR) AS discounted_price; 
+<br>Question 2: Update Customer Loyalty Points<br>
+<br>
+Task: Award 100 loyalty points to a customer with a specific customer ID (let's use customer ID = 101). Retrieve and display their updated loyalty points balance.
+
+<br>
+Answer:
+
+<br>DECLARE @customer_id INT = 101;
+DECLARE @loyalty_points_added INT = 100;
+
+-- Update the loyalty points directly in the table
+UPDATE Customers
+SET loyalty_points = loyalty_points + @loyalty_points_added
+WHERE customer_id = @customer_id;
+
+-- Retrieve and display the updated balance
+SELECT 'Customer ID: ' + CAST(@customer_id AS VARCHAR) AS customer_id,
+       'Updated Loyalty Points: ' + CAST(loyalty_points AS VARCHAR) AS updated_loyalty_points
+FROM Customers
+WHERE customer_id = @customer_id; 
+<br>Question 3:  Find Orders Within a Date Range<br>
+<br>
+Task:  Use variables to define a start date and an end date.  Retrieve all orders placed between those dates.
+
+<br>
+Answer:
+
+<br>DECLARE @start_date DATE = '2023-10-01'; 
+DECLARE @end_date DATE = '2023-10-31';
+
+SELECT *
+FROM Orders
+WHERE order_date &gt;= @start_date AND order_date &lt;= @end_date;
+<br>Bonus Challenge!<br>Try combining concepts: Calculate the average order amount for orders placed within a specific date range (use variables for the dates!).<br>Important Considerations<br>
+<br>Data Type Matching:  Always make sure your variable data types match the data types of the columns you're working with in your tables.
+<br>Error Handling:  In real-world scenarios, add error handling (e.g., using TRY...CATCH blocks) to make your code more robust. 
+]]></description><link>SQL-SERVER\11. TRANSACT SQL\3. Activity - Variables.html</link><guid isPermaLink="false">SQL-SERVER/11. TRANSACT SQL/3. Activity - Variables.md</guid><pubDate>Wed, 02 Oct 2024 03:54:04 GMT</pubDate></item><item><title><![CDATA[4. Temp Tables]]></title><description><![CDATA[ 
+ <br>What are Temp Tables?<br>Temporary tables are, as their name suggests, tables that exist temporarily in a SQL Server database. They are created by users and automatically dropped (deleted) when they are no longer needed or when the session that created them ends.<br>Types of Temp Tables:<br>
+<br>Local Temp Tables (#table_name): Visible only within the current session or connection and are automatically dropped when the session ends.
+<br>Global Temp Tables (##table_name): Accessible to all users on the same SQL Server instance. They are dropped when the last user referencing the table ends their session.
+<br>Why Use Temp Tables?<br>
+<br>Intermediate Data Storage: Store results from complex queries or calculations for later use within a larger process.
+<br>Performance Optimization: Break down complex operations into smaller, more manageable steps, improving query efficiency.
+<br>Data Manipulation: Modify, filter, or aggregate data without affecting the original source tables.
+<br>Reporting and Analysis:  Prepare and structure data for reports without persisting changes in the main database.
+<br>Creating Temp Tables<br>The syntax is very similar to creating a regular table, just with a # or ## prefix:<br>-- Local Temp Table
+CREATE TABLE #Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(255),
+    City VARCHAR(255)
+);
+
+-- Global Temp Table
+CREATE TABLE ##ProductSales (
+    ProductID INT,
+    TotalSales DECIMAL(10,2)
+);
+<br>Populating Temp Tables<br>
+<br>
+INSERT INTO...SELECT:
+INSERT INTO #Customers (CustomerID, CustomerName, City)
+SELECT CustomerID, CustomerName, City
+FROM Customers
+WHERE Country = 'USA';
+
+
+<br>
+SELECT...INTO:
+SELECT ProductID, SUM(OrderAmount) AS TotalSales
+INTO ##ProductSales
+FROM Orders
+GROUP BY ProductID;
+
+
+<br>Using Temp Tables<br>You can query and manipulate temp tables just like regular tables:<br>-- Selecting data
+SELECT * FROM #Customers;
+
+-- Joining with other tables
+SELECT o.OrderID, c.CustomerName
+FROM Orders o
+INNER JOIN #Customers c ON o.CustomerID = c.CustomerID;
+
+-- Updating data
+UPDATE #Customers
+SET City = 'New York'
+WHERE CustomerID = 1;
+<br>Dropping Temp Tables (usually automatic)<br>While they are usually dropped automatically, you can explicitly drop them using:<br>DROP TABLE #Customers; 
+DROP TABLE ##ProductSales;
+<br>Best Practices and Considerations<br>
+<br>Naming Conventions:  Use prefixes like #tmp or ##temp to make temp tables easily identifiable.
+<br>Scope:  Be mindful of the scope (local or global). Don't use global temp tables unless absolutely necessary, as they can impact server resources.
+<br>Error Handling: When working with transactions, consider handling temp table creation and deletion within the transaction to ensure data consistency.
+<br>Example: Analyzing Recent Sales<br>-- Create a temp table to store orders from the last month
+CREATE TABLE #RecentOrders AS
+SELECT * 
+FROM Orders
+WHERE OrderDate &gt;= DATEADD(month, -1, GETDATE());
+
+-- Analyze sales from the temp table
+SELECT 
+    AVG(OrderAmount) AS AverageOrderValue,
+    SUM(OrderAmount) AS TotalSalesValue
+FROM #RecentOrders;
+
+-- Drop the temp table (optional - it will be dropped automatically)
+DROP TABLE #RecentOrders;
+]]></description><link>SQL-SERVER\11. TRANSACT SQL\4. Temp Tables.html</link><guid isPermaLink="false">SQL-SERVER/11. TRANSACT SQL/4. Temp Tables.md</guid><pubDate>Mon, 30 Sep 2024 17:43:20 GMT</pubDate></item><item><title><![CDATA[5. Activity - Temp Tables]]></title><description><![CDATA[ 
+ <br><br>You're a data analyst for an online clothing store. You need to generate a sales report for the marketing team that shows:<br>
+<br>Top 10 best-selling products for the last quarter. 
+<br>Total revenue generated by these products.
+<br>Potential revenue lost due to discounts offered on these products during the same period.
+<br>Tables:<br>
+<br>Products: ProductID, ProductName, Price
+<br>Orders: OrderID, OrderDate, CustomerID
+<br>OrderDetails: OrderDetailID, OrderID, ProductID, Quantity, Discount
+<br>Let's break down how to use a temp table effectively:<br>Step 1: Identify the Top-Selling Products<br>We'll create a temp table to store the top 10 products based on the quantity sold last quarter.<br>-- Create the temp table
+CREATE TABLE #TopSellingProducts (
+    ProductID INT PRIMARY KEY,
+    TotalQuantitySold INT
+);
+
+-- Populate with top 10 selling products
+INSERT INTO #TopSellingProducts (ProductID, TotalQuantitySold)
+SELECT TOP 10    
+    od.ProductID, 
+    SUM(od.Quantity) AS TotalQuantitySold
+FROM OrderDetails od
+JOIN Orders o ON od.OrderID = o.OrderID
+WHERE o.OrderDate &gt;= DATEADD(quarter, -1, GETDATE())
+GROUP BY od.ProductID
+ORDER BY TotalQuantitySold DESC; 
+<br>Step 2: Calculate Revenue and Potential Lost Revenue<br>Now, we'll join our temp table with other tables to calculate revenue figures:<br>-- Calculate revenue and potential lost revenue
+SELECT 
+    tsp.ProductID,
+    p.ProductName,
+    SUM(od.Quantity * p.Price) AS TotalRevenue,
+    SUM(od.Quantity * p.Price * od.Discount) AS TotalDiscountAmount,
+    SUM(od.Quantity * p.Price) - SUM(od.Quantity * p.Price * od.Discount) AS PotentialLostRevenue
+FROM #TopSellingProducts tsp
+JOIN Products p ON tsp.ProductID = p.ProductID
+JOIN OrderDetails od ON tsp.ProductID = od.ProductID
+JOIN Orders o ON od.OrderID = o.OrderID
+WHERE o.OrderDate &gt;= DATEADD(quarter, -1, GETDATE())
+GROUP BY tsp.ProductID, p.ProductName
+ORDER BY TotalRevenue DESC;
+<br>Step 3: Clean Up (Optional)<br>DROP TABLE #TopSellingProducts;
+<br>Why This Works Well with a Temp Table<br>
+<br>Modularity: We break down a complex calculation into more manageable steps, improving code readability and maintainability.
+<br>Performance: By storing the top-selling product IDs in the temp table, we avoid recalculating them repeatedly, potentially speeding up the overall query, especially for larger datasets.
+<br>Focus: The temp table allows us to focus on analyzing revenue without the complexity of the initial ranking logic.
+<br>Activity:<br>
+<br>Try adapting this example to find the bottom 5 selling products and their potential lost revenue if discounts were increased.
+<br>Experiment with adding more columns to your temp table for further analysis, such as average discount per product.
+]]></description><link>SQL-SERVER\11. TRANSACT SQL\5. Activity - Temp Tables.html</link><guid isPermaLink="false">SQL-SERVER/11. TRANSACT SQL/5. Activity - Temp Tables.md</guid><pubDate>Thu, 03 Oct 2024 03:47:52 GMT</pubDate></item><item><title><![CDATA[6.  Error Handling]]></title><description><![CDATA[ 
+ <br>Why Error Handling Matters<br>
+<br>Prevent Abrupt Terminations: Without error handling, unexpected issues can cause your entire script or batch to stop executing, potentially leaving data in an inconsistent state.
+<br>Informative Feedback:  Well-implemented error handling lets you provide helpful messages to users (or log them for debugging) so you can pinpoint and address problems quickly.
+<br>Controlled Execution Flow: You can decide how your code should proceed when errors occur – whether to attempt retries, execute alternative logic, or gracefully exit.
+<br>**TRY...CATCH Blocks<br>BEGIN TRY
+    -- The code you want to execute that might raise an error
+    -- ... your T-SQL statements here ...
+
+END TRY
+BEGIN CATCH
+    -- The code to execute IF an error occurs within the TRY block
+    -- ... error handling logic here ...
+
+END CATCH;
+<br>
+<br>BEGIN TRY / END TRY: Encloses the code that you want to monitor for errors.
+<br>BEGIN CATCH / END CATCH:  Defines the block of code that gets executed if ANY error occurs within the corresponding TRY block.
+<br>Key Information Available Inside CATCH<br>
+<br>ERROR_NUMBER(): Returns the error number of the occurred error.
+<br>ERROR_MESSAGE(): Returns the complete error message text.
+<br>ERROR_SEVERITY(): Returns the severity level of the error (more on this below).
+<br>ERROR_STATE(): Provides the state number associated with the error.
+<br>ERROR_LINE():  Indicates the line number in the TRY block where the error occurred (helpful for debugging).
+<br>ERROR_PROCEDURE():  If the error occurred inside a stored procedure, this returns the procedure's name.
+<br>Example: Handling Division by Zero<br>BEGIN TRY
+    DECLARE @dividend INT = 10;
+    DECLARE @divisor INT = 0;
+
+    SELECT @dividend / @divisor; -- Potential divide-by-zero error
+
+END TRY
+BEGIN CATCH
+    -- Log the error information
+    PRINT 'Error Number: ' + CAST(ERROR_NUMBER() AS VARCHAR);
+    PRINT 'Error Message: ' + ERROR_MESSAGE();
+
+    -- Provide a user-friendly message
+    THROW; -- Re-throw the error to halt execution (optional)
+END CATCH;
+<br>Error Severity Levels<br>SQL Server categorizes errors by severity:<br>
+<br>1-10: Informational messages. Your code might continue executing.
+<br>11-16: User errors, often caused by incorrect data or syntax. Transactions might be rolled back. You can usually handle these in CATCH blocks.
+<br>17-25:  System errors (e.g., hardware failures, resource issues). These are usually beyond your application's control.
+<br>Best Practices<br>
+<br>Be Specific: Handle errors as precisely as possible. Avoid overly broad CATCH blocks that might mask unexpected problems.
+<br>Provide Useful Information: Log error details or display user-friendly messages to aid in troubleshooting.
+<br>Transaction Management: If you're working with transactions, use @@TRANCOUNT and ROLLBACK TRANSACTION strategically within CATCH blocks to ensure data integrity.
+<br>Don't Overuse: Use TRY...CATCH  when you anticipate potential errors and can provide meaningful recovery or feedback. Don't wrap all your code in TRY...CATCH unnecessarily.
+<br>Beyond the Basics<br>
+<br>Raising Errors: You can use the RAISERROR statement to explicitly generate custom errors in your T-SQL code.
+<br>Nested TRY...CATCH: Handle errors at different levels of your code for more fine-grained control.
+]]></description><link>SQL-SERVER\11. TRANSACT SQL\6.  Error Handling.html</link><guid isPermaLink="false">SQL-SERVER/11. TRANSACT SQL/6.  Error Handling.md</guid><pubDate>Mon, 30 Sep 2024 17:46:56 GMT</pubDate></item><item><title><![CDATA[TRANSACT SQL]]></title><description><![CDATA[ 
+ <br><a data-href="1. Transact-SQL" href="SQL-SERVER\11. TRANSACT SQL\1. Transact-SQL.html" class="internal-link" target="_self" rel="noopener nofollow">1. Transact-SQL</a><br>
+<a data-href="2. Scripts and Batches in T-SQL" href="SQL-SERVER\11. TRANSACT SQL\2. Scripts and Batches in T-SQL.html" class="internal-link" target="_self" rel="noopener nofollow">2. Scripts and Batches in T-SQL</a><br>
+<a data-href="3. Activity - Variables" href="SQL-SERVER\11. TRANSACT SQL\3. Activity - Variables.html" class="internal-link" target="_self" rel="noopener nofollow">3. Activity - Variables</a><br>
+<a data-href="4. Temp Tables" href="SQL-SERVER\11. TRANSACT SQL\4. Temp Tables.html" class="internal-link" target="_self" rel="noopener nofollow">4. Temp Tables</a><br>
+<a data-href="5. Activity - Temp Tables" href="SQL-SERVER\11. TRANSACT SQL\5. Activity - Temp Tables.html" class="internal-link" target="_self" rel="noopener nofollow">5. Activity - Temp Tables</a><br>
+<a data-href="6.  Error Handling" href="SQL-SERVER\11. TRANSACT SQL\6.  Error Handling.html" class="internal-link" target="_self" rel="noopener nofollow">6.  Error Handling</a>]]></description><link>SQL-SERVER\11. TRANSACT SQL\TRANSACT SQL.html</link><guid isPermaLink="false">SQL-SERVER/11. TRANSACT SQL/TRANSACT SQL.md</guid><pubDate>Mon, 23 Dec 2024 16:24:29 GMT</pubDate></item><item><title><![CDATA[1. Cursor]]></title><description><![CDATA[ 
+ <br>What is a Cursor?<br>Think of a cursor as a pointer that allows you to iterate through a result set (data returned by a query) one row at a time. It's like having a magnifying glass that you can move over each row to examine and process it individually.<br>Why Use Cursors?<br>
+<br>Row-by-Row Operations: When you need to perform specific actions or calculations on each row in a result set .
+<br>Iterative Processing: For tasks that require looping through data and potentially making decisions or updates based on the values in each row.
+<br>Cursor Trade-offs<br>Keep in mind that while cursors offer this row-by-row control, they often come with performance overhead compared to set-based operations, especially for large datasets. SQL Server is optimized for working with sets of data, so if possible, try to find set-based solutions first.<br>Creating and Using Cursors<br>
+<br>
+Declare the Cursor:
+DECLARE customer_cursor CURSOR FOR 
+SELECT CustomerID, CustomerName, City
+FROM Customers
+WHERE Country = 'USA';
+
+
+<br>This doesn't retrieve data yet; it just defines the SELECT statement that will populate the cursor.
+
+
+<br>
+Open the Cursor:
+OPEN customer_cursor;
+
+
+<br>This executes the SELECT statement and positions the cursor at the first row.
+
+
+<br>
+Fetch Data from the Cursor:
+DECLARE @customer_id INT;
+DECLARE @customer_name VARCHAR(255);
+DECLARE @city VARCHAR(255);
+
+FETCH NEXT FROM customer_cursor INTO @customer_id, @customer_name, @city;
+
+
+<br>FETCH NEXT retrieves the next row from the cursor.  
+<br>INTO places the values from the fetched row into the specified variables.
+
+
+<br>
+Process the Fetched Data:
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- Perform operations on the data within the variables
+    PRINT 'Customer ID: ' + CAST(@customer_id AS VARCHAR) + ', Name: ' + @customer_name + ', City: ' + @city; 
+
+    -- Fetch the next row
+    FETCH NEXT FROM customer_cursor INTO @customer_id, @customer_name, @city;
+END;
+
+
+<br>@@FETCH_STATUS indicates whether the fetch was successful (0) or not.
+<br>The WHILE loop continues fetching and processing rows until there are no more rows in the cursor.
+
+
+<br>
+Close and Deallocate the Cursor:
+CLOSE customer_cursor;  -- Releases resources but keeps the cursor definition
+DEALLOCATE customer_cursor; -- Deletes the cursor entirely
+
+
+<br>Complete Example:<br>-- Declare variables
+DECLARE @customer_id INT;
+DECLARE @customer_name VARCHAR(255);
+DECLARE @city VARCHAR(255);
+
+-- Declare and open the cursor
+DECLARE customer_cursor CURSOR FOR
+SELECT CustomerID, CustomerName, City
+FROM Customers
+WHERE Country = 'USA';
+
+OPEN customer_cursor;
+
+-- Fetch the first row
+FETCH NEXT FROM customer_cursor INTO @customer_id, @customer_name, @city;
+
+-- Loop through the result set
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- Process data (example: print customer information)
+    PRINT 'Customer ID: ' + CAST(@customer_id AS VARCHAR) + ', Name: ' + @customer_name + ', City: ' + @city; 
+
+    -- Fetch the next row
+    FETCH NEXT FROM customer_cursor INTO @customer_id, @customer_name, @city;
+END;
+
+-- Close and deallocate the cursor
+CLOSE customer_cursor;
+DEALLOCATE customer_cursor; 
+<br>Important Notes:<br>
+<br>Cursor Types: SQL Server offers different cursor types that affect locking and concurrency. The default is usually sufficient for most cases.
+<br>Error Handling: Incorporate error handling (TRY...CATCH) to gracefully handle potential issues during cursor operations.
+<br>Alternatives:  Whenever possible, explore set-based approaches (using UPDATE, JOIN, subqueries, etc.) before resorting to cursors, as they often provide better performance.
+<br>Cursors give you fine-grained control over your data, but use them judiciously, and always consider potential performance implications. ]]></description><link>SQL-SERVER\12. CURSOR\1. Cursor.html</link><guid isPermaLink="false">SQL-SERVER/12. CURSOR/1. Cursor.md</guid><pubDate>Fri, 04 Oct 2024 03:53:06 GMT</pubDate></item><item><title><![CDATA[2. `CURSOR` and `SELECT`]]></title><description><![CDATA[ 
+ <br>SELECT (Set-Based Approach)<br>
+<br>How it works: Processes data as a whole set (multiple rows at a time). 
+<br>Strengths:
+
+<br>Performance: Optimized by the database engine for speed, especially on large datasets.
+<br>Conciseness: Usually requires less code than cursors.
+<br>Parallelism:  SQL Server can often process set-based operations in parallel, further improving performance.
+
+
+<br>Weaknesses:
+
+<br>Row-by-Row Limitation: Not ideal if you need to perform complex actions or make decisions on each row individually.
+
+
+<br>CURSOR (Iterative Approach)<br>
+<br>How it works:  Processes data one row at a time.
+<br>Strengths:
+
+<br>Granular Control:  Provides direct control over each row's data, allowing for custom logic and decisions per row.
+
+
+<br>Weaknesses:
+
+<br>Performance: Generally slower than set-based operations, especially for larger datasets, as it involves a lot of back-and-forth communication with the database engine.
+<br>Complexity:  Requires more code and careful management (opening, fetching, closing).
+
+
+<br>When to Choose What<br><br>Example: Applying Discounts<br>Let's say you have a table of products and want to apply a 10% discount to products priced over $50:<br>
+<br>
+SELECT (for retrieving products):
+SELECT ProductID, ProductName, Price
+FROM Products
+WHERE Price &gt; 50;
+
+
+<br>
+UPDATE (set-based update):
+UPDATE Products
+SET Price = Price * 0.9  -- Apply 10% discount
+WHERE Price &gt; 50;
+
+ No cursor needed – SQL Server efficiently updates all eligible rows.
+
+<br>
+CURSOR (if you needed custom logic per row):
+DECLARE @product_id INT;
+DECLARE @price DECIMAL(10,2);
+
+DECLARE discount_cursor CURSOR FOR
+SELECT ProductID, Price
+FROM Products;
+
+OPEN discount_cursor;
+FETCH NEXT FROM discount_cursor INTO @product_id, @price;
+
+WHILE @@FETCH_STATUS = 0 
+BEGIN
+    -- Custom logic per row (example)
+    IF @price &gt; 50 
+    BEGIN
+        UPDATE Products 
+        SET Price = @price * 0.9
+        WHERE ProductID = @product_id; 
+    END
+    ELSE
+    BEGIN
+        -- Different logic for products &lt;= $50
+        -- ...
+    END
+
+    FETCH NEXT FROM discount_cursor INTO @product_id, @price;
+END
+
+CLOSE discount_cursor;
+DEALLOCATE discount_cursor;
+
+
+<br>In the example above, using a cursor is less efficient than the UPDATE statement because we can express the discount logic directly in the WHERE clause.<br>In a nutshell:<br>
+<br>Choose SELECT and set-based approaches whenever you can for optimal performance.
+<br>Use CURSOR only when you need to perform complex row-by-row operations that cannot be easily accomplished with set-based SQL. 
+<br>If you can share a specific task, I can help you determine the most efficient approach! ]]></description><link>SQL-SERVER\12. CURSOR\2. `CURSOR` and `SELECT`.html</link><guid isPermaLink="false">SQL-SERVER/12. CURSOR/2. `CURSOR` and `SELECT`.md</guid><pubDate>Sat, 05 Oct 2024 06:35:38 GMT</pubDate></item><item><title><![CDATA[3. Types of Cursers]]></title><description><![CDATA[ 
+ <br>1. Forward-Only Cursors<br>
+<br>Movement: Can only move forward through the result set, one row at a time.  No going back!
+<br>Default: This is the default cursor type if you don't specify one. 
+<br>Efficiency: Generally the fastest and uses the least resources.
+<br>Common Use Cases:
+
+<br>When you need to process each row once, sequentially.
+<br>When you don't need to update data through the cursor.
+
+
+<br>2. Static Cursors<br>
+<br>Snapshot: Creates a static snapshot of the data at the time the cursor is opened.
+<br>Insensitivity to Changes: Changes made to the underlying data by other users or processes are not reflected in the cursor's view.
+<br>Resource Usage: Can consume more temporary resources, especially with large result sets.
+<br>Common Use Cases:
+
+<br>When you need a consistent view of the data, even if it's being modified concurrently.
+<br>When you're primarily reading data and don't need to see updates made during cursor processing.
+
+
+<br>3. Dynamic Cursors<br>
+<br>Real-Time Updates: Reflects changes made to the underlying data in real-time. 
+<br>Sensitivity to Changes:  If another user updates a row you've already fetched, you'll see those updates if you fetch that row again.
+<br>Resource Intensive: Generally the least efficient type as they require more overhead for maintaining consistency.
+<br>Common Use Cases:
+
+<br>When you need the most up-to-date data throughout the cursor's lifetime.
+<br>When your cursor logic needs to be aware of concurrent data modifications.
+
+
+<br>4. Keyset Cursors<br>
+<br>Keyset Tracking:  Maintains a set of unique identifiers (keys) for the rows in the result set. 
+<br>Balance: Offers a compromise between static and dynamic cursors.
+<br>Update Visibility: Detects updates and deletions made to rows in the keyset, but new rows are not visible.
+<br>Common Use Cases:
+
+<br>When you need to see updates to existing rows but don't need to process newly added rows.
+
+
+<br>Choosing the Right Cursor Type<br>The best cursor type depends on your specific requirements:<br>
+<br>Performance is Key:  Stick with the default forward-only cursor whenever possible if you only need to process rows sequentially.
+<br>Data Consistency: Use static cursors if you need a consistent snapshot and don't need to see changes made during processing.
+<br>Real-Time Updates: Opt for dynamic cursors only when you absolutely require real-time data visibility.
+<br>Update Awareness: Consider keyset cursors as a balance when you need to see updates to existing rows but not new insertions.
+<br>Specifying Cursor Types<br>You can explicitly define the cursor type when declaring it:<br>-- Forward-only cursor (default)
+DECLARE my_cursor CURSOR FOR SELECT ...
+
+-- Static cursor
+DECLARE my_cursor CURSOR STATIC FOR SELECT ...
+
+-- Dynamic cursor 
+DECLARE my_cursor CURSOR DYNAMIC FOR SELECT ...
+
+-- Keyset cursor
+DECLARE my_cursor CURSOR KEYSET FOR SELECT ...
+<br>Remember that while cursors offer row-by-row processing, they can introduce performance overhead, especially with larger datasets. Always explore set-based solutions first unless your logic specifically demands a cursor's iterative approach. <br>Let me know if you have any more questions or specific scenarios in mind! I'm happy to help you choose the most appropriate cursor type! ]]></description><link>SQL-SERVER\12. CURSOR\3. Types of Cursers.html</link><guid isPermaLink="false">SQL-SERVER/12. CURSOR/3. Types of Cursers.md</guid><pubDate>Thu, 03 Oct 2024 01:13:18 GMT</pubDate></item><item><title><![CDATA[4. Cursor Locks]]></title><description><![CDATA[ 
+ <br>How Cursor Locks Work<br>
+<br>Row-by-Row Nature: Because cursors process data one row at a time, SQL Server needs to place locks on rows to prevent conflicts when multiple users or processes are accessing the same data.
+<br>Lock Duration: Locks held by cursors can be held for a longer duration compared to locks acquired during regular SELECT, UPDATE, or DELETE statements, as the cursor might iterate through rows slowly.
+<br>Types of Cursor Locks<br>The type of lock a cursor acquires depends on:<br>
+<br>Cursor Type: Different cursor types have varying locking behaviors.
+<br>UPDATE and DELETE Permissions: If you plan to update or delete rows through the cursor, you'll need appropriate permissions, and SQL Server might acquire stricter locks.
+<br>Isolation Level: The transaction isolation level (e.g., READ COMMITTED, REPEATABLE READ) influences the type and duration of locks held.
+<br>Common Cursor Locking Scenarios<br><br>Managing Cursor Locks<br>
+<br>Choose the Right Cursor: Select the least restrictive cursor type that meets your needs to minimize lock contention.
+<br>Scope Carefully: Declare cursors within transactions to control their lifetime and release locks sooner.
+<br>Optimize FETCH Size: If you're processing large result sets, consider using FETCH NEXT with a larger row count to reduce the frequency of lock requests. 
+<br>Use Hints (Sparingly):  In specific scenarios, you can use cursor hints (e.g., READ_ONLY, OPTIMISTIC) to influence locking behavior, but use them judiciously.
+<br>Potential Issues with Cursor Locks<br>
+<br>Blocking:  If a cursor holds a lock for an extended period, it can prevent other processes from accessing the locked rows, leading to performance bottlenecks. 
+<br>Deadlocks:  In complex scenarios with multiple cursors or transactions, poorly managed locks can result in deadlocks, where two or more processes are stuck waiting for each other to release resources.
+<br>Best Practices<br>
+<br>Minimize Cursor Use: Explore set-based alternatives whenever possible, as they are generally more efficient and involve less locking overhead.
+<br>Keep Cursors Short-Lived: Close and deallocate cursors as soon as you're finished with them to release locks promptly.
+<br>Understand Isolation Levels:  Familiarize yourself with transaction isolation levels and their impact on locking. Choose the appropriate isolation level to balance data integrity with concurrency.
+<br>In Conclusion:<br>Cursor locking is a crucial aspect to consider when working with cursors in SQL Server. By understanding the different cursor types, potential locking issues, and best practices, you can write more efficient, scalable, and concurrency-aware T-SQL code. <br>Let me know if you have any specific scenarios in mind, and I'll be happy to help you analyze the locking implications! ]]></description><link>SQL-SERVER\12. CURSOR\4. Cursor Locks.html</link><guid isPermaLink="false">SQL-SERVER/12. CURSOR/4. Cursor Locks.md</guid><pubDate>Sat, 05 Oct 2024 08:19:15 GMT</pubDate></item><item><title><![CDATA[CURSOR]]></title><description><![CDATA[ 
+ <br><a data-href="1. Cursor" href="SQL-SERVER\12. CURSOR\1. Cursor.html" class="internal-link" target="_self" rel="noopener nofollow">1. Cursor</a><br>
+<a data-href="2. `CURSOR` and `SELECT`" href="SQL-SERVER\12. CURSOR\2. `CURSOR` and `SELECT`.html" class="internal-link" target="_self" rel="noopener nofollow">2. `CURSOR` and `SELECT`</a><br>
+<a data-href="3. Types of Cursers" href="SQL-SERVER\12. CURSOR\3. Types of Cursers.html" class="internal-link" target="_self" rel="noopener nofollow">3. Types of Cursers</a><br>
+<a data-href="4. Cursor Locks" href="SQL-SERVER\12. CURSOR\4. Cursor Locks.html" class="internal-link" target="_self" rel="noopener nofollow">4. Cursor Locks</a>]]></description><link>SQL-SERVER\12. CURSOR\CURSOR.html</link><guid isPermaLink="false">SQL-SERVER/12. CURSOR/CURSOR.md</guid><pubDate>Mon, 23 Dec 2024 16:24:53 GMT</pubDate></item><item><title><![CDATA[1. Introduction]]></title><description><![CDATA[ 
+ <br>What is a Transaction?<br>Imagine you're at an ATM wanting to withdraw money. You wouldn't want the machine to deduct the amount from your account but then fail to dispense the cash, would you? That's where transactions come in!<br>In the simplest terms:<br>
+<br>A transaction is a logical unit of work in a database that groups together one or more SQL statements.
+<br>It ensures that all statements within the transaction are treated as a single, indivisible operation. Either all of them succeed (and the changes are permanently saved), or if even one fails, the entire transaction fails (and no changes are made to the database).
+<br>Why Are Transactions Important?<br>They are the backbone of data integrity and reliability:<br>
+<br>Atomicity (All or Nothing): They guarantee that a series of actions either completely happen or don't happen at all – no partial updates!
+<br>Consistency: Transactions maintain the database in a valid state, enforcing data integrity rules.
+<br>Isolation:  Transactions are isolated from each other, preventing interference and inconsistencies.
+<br>Durability: Once committed, changes made within a transaction are permanent, even if the system crashes.
+<br>Transaction Process: A Step-by-Step Guide<br>
+<br>
+BEGIN TRANSACTION: You mark the beginning of a transaction, telling the database to treat the following statements as a unit.
+BEGIN TRANSACTION;
+
+
+<br>
+The Work Phase:  You execute the SQL statements that make up your logical operation.
+UPDATE Accounts SET Balance = Balance - 100 WHERE AccountID = 123;
+INSERT INTO Transactions (AccountID, Amount) VALUES (123, -100);
+-- ... more statements ...
+
+
+<br>
+The Decision Point: COMMIT or ROLLBACK
+
+<br>COMMIT TRANSACTION;  If everything within the transaction has been successful, you "commit" the changes, making them permanent.
+<br>ROLLBACK TRANSACTION; If even a single statement fails or an error occurs, you "rollback" the transaction, undoing all the changes made since the BEGIN TRANSACTION.
+
+
+<br>Example (Back to the ATM)<br>
+<br>BEGIN TRANSACTION: The ATM starts a transaction when you initiate a withdrawal.
+<br>Work Phase: It deducts the amount from your account and prepares to dispense cash.
+<br>Decision Time:
+
+<br>COMMIT: If both steps succeed, the transaction is committed, and you get your cash!
+<br>ROLLBACK: If either step fails (e.g., insufficient funds or a hardware problem), the transaction is rolled back – the money is returned to your account, and no cash is dispensed.
+
+
+]]></description><link>SQL-SERVER\13. TRANSACTIONS\1. Introduction.html</link><guid isPermaLink="false">SQL-SERVER/13. TRANSACTIONS/1. Introduction.md</guid><pubDate>Fri, 04 Oct 2024 17:04:30 GMT</pubDate></item><item><title><![CDATA[2. Implicit and Explicit Transactions]]></title><description><![CDATA[ 
+ <br>1. Implicit Transactions: The "Behind-the-Scenes" Helpers<br>
+<br>
+How They Work: SQL Server can automatically start and manage transactions for you under certain conditions, even without you explicitly using BEGIN TRANSACTION. 
+
+<br>
+Triggering Implicit Transactions: 
+
+<br>Data Modification Statements: When you execute statements like INSERT, UPDATE, DELETE, and others that modify data, and you are not already within an explicit transaction, SQL Server might start an implicit transaction.
+<br>Database/Connection Settings: The IMPLICIT_TRANSACTIONS setting at the database or connection level influences this behavior. 
+
+
+<br>
+Commit/Rollback:
+
+<br>Auto-Commit: By default, if no errors occur, SQL Server will automatically commit the implicit transaction after the statement completes.
+<br>Auto-Rollback: If an error happens, the implicit transaction will typically be rolled back.
+
+
+<br>
+Example:
+-- Assuming IMPLICIT_TRANSACTIONS is ON (which is often the default)
+UPDATE Products SET Price = Price * 1.10 WHERE CategoryID = 12; 
+
+-- If this UPDATE succeeds, SQL Server will likely have implicitly:
+-- 1. Started a transaction
+-- 2. Executed the UPDATE
+-- 3. Committed the transaction
+
+
+<br>
+Benefits: 
+
+<br>Simplicity: Convenient for single-statement operations where you want the changes to be automatically committed or rolled back. 
+
+
+<br>
+Drawbacks: 
+
+<br>Less Control: You have less fine-grained control over the transaction's boundaries and error handling.
+<br>Potential Confusion: If you're not aware of implicit transactions, you might get unexpected behavior, especially when working with multiple statements where you need them to be treated as a single unit.
+
+
+<br>2. Explicit Transactions: Taking Charge<br>
+<br>
+How They Work: You explicitly define the beginning and end of a transaction using T-SQL statements. 
+
+<br>
+Syntax:
+BEGIN TRANSACTION; -- Marks the start
+
+-- Your SQL statements go here ...
+
+COMMIT TRANSACTION; -- Makes changes permanent (if successful)
+-- OR
+ROLLBACK TRANSACTION; -- Reverts changes (if there are errors)
+
+
+<br>
+Benefits:
+
+<br>Full Control: You decide precisely which statements are part of the transaction.
+<br>Complex Logic: Ideal for multi-step operations that need to be treated atomically.
+<br>Granular Error Handling: You can include error handling within the transaction using TRY...CATCH blocks to manage specific error conditions and potentially commit or rollback based on your logic. 
+
+
+<br>
+Example:
+BEGIN TRANSACTION;
+
+BEGIN TRY
+    -- Deduct amount from one account
+    UPDATE Accounts SET Balance = Balance - 500 WHERE AccountID = 101; 
+
+    -- Add the amount to another account
+    UPDATE Accounts SET Balance = Balance + 500 WHERE AccountID = 202;
+
+    -- Commit if both updates were successful
+    COMMIT TRANSACTION; 
+    PRINT 'Transfer successful!';
+END TRY
+BEGIN CATCH
+    -- Handle errors (e.g., insufficient funds, deadlocks)
+    ROLLBACK TRANSACTION;
+    PRINT 'Transfer failed. Rolling back.';
+END CATCH
+
+
+<br>Which to Choose?<br>
+<br>Implicit transactions are generally suitable for simple, single-statement modifications where you want automatic commit/rollback.
+<br>Explicit transactions are essential when:
+
+<br>You are performing multiple related data modifications.
+<br>You need precise control over transaction boundaries.
+<br>You want to implement custom error handling logic within the transaction.
+
+
+]]></description><link>SQL-SERVER\13. TRANSACTIONS\2. Implicit and Explicit Transactions.html</link><guid isPermaLink="false">SQL-SERVER/13. TRANSACTIONS/2. Implicit and Explicit Transactions.md</guid><pubDate>Fri, 04 Oct 2024 17:07:00 GMT</pubDate></item><item><title><![CDATA[3. Working with Locks, Types of locks]]></title><description><![CDATA[ 
+ <br>What are Locks?<br>
+<br>Concurrency Control: Locks are like reservations placed on database resources (rows, pages, tables, etc.) by SQL Server. They prevent conflicts and ensure that when multiple users or processes access data simultaneously, they do so in an orderly and consistent manner.
+<br>Data Integrity:  Locks help enforce data integrity by preventing dirty reads, non-repeatable reads, and phantom reads (more on these later) that could occur without proper concurrency control.
+<br>Lock Modes: Different Levels of Restriction<br>SQL Server uses different lock modes to balance concurrency with data integrity:<br>
+<br>
+Shared (S) Locks
+
+<br>Purpose:  Granted when reading data.  Allows multiple readers to access the same resource simultaneously.
+<br>Restriction: Prevents other transactions from modifying the data while the shared lock is held.
+<br>Example: When you execute a SELECT statement, SQL Server typically acquires shared locks on the rows being read. 
+
+
+<br>
+Exclusive (X) Locks
+
+<br>Purpose: Granted when modifying data. Allows only one transaction to hold an exclusive lock on a resource at a time.
+<br>Restriction: Prevents all other transactions (both readers and writers) from accessing the locked resource.
+<br>Example: When you perform an UPDATE or DELETE, SQL Server typically acquires exclusive locks on the rows being modified.
+
+
+<br>
+Update (U) Locks
+
+<br>Purpose: An "intention" lock. Used before acquiring an exclusive lock to prevent deadlocks. 
+<br>Restriction: Allows shared locks to be acquired by other transactions, but prevents other transactions from acquiring update or exclusive locks on the same resource. 
+
+
+<br>
+Intent Locks (IS, IX, IU)
+
+<br>Purpose:  Indicate that a transaction intends to acquire a shared, exclusive, or update lock on lower-level resources (e.g., rows within a table).
+<br>Example:  If a transaction acquires an intent exclusive lock (IX) on a table, it signals its intent to later acquire exclusive locks on some rows within that table.
+
+
+<br>Lock Granularity: What Gets Locked?<br>
+<br>Rows: Most commonly, locks are placed at the row level.
+<br>Pages: SQL Server stores data in pages (8KB blocks). Sometimes, locks are escalated to the page level for efficiency, especially if a transaction is modifying multiple rows on the same page.
+<br>Tables: In some cases (e.g., bulk operations or large updates), locks can escalate to the entire table level, which can significantly impact concurrency.
+<br>Key Concepts<br>
+<br>Lock Duration: Locks are typically held only for as long as necessary to complete the operation. However, cursors and transactions can extend lock durations.
+<br>Blocking:  When one transaction's lock request conflicts with a lock held by another transaction, the requesting transaction is blocked until the lock is released.
+<br>Deadlocks: A deadlock occurs when two or more transactions are blocked, each waiting for the other to release a lock. SQL Server has a deadlock detection mechanism and will choose one transaction to be the "victim," rolling back that transaction to allow others to proceed.
+<br>Best Practices for Minimizing Locking Issues<br>
+<br>Keep Transactions Short: Shorter transactions acquire locks for less time, reducing contention.
+<br>Access Data in the Same Order: If possible, structure your code to access data in a consistent order to reduce the likelihood of deadlocks.
+<br>Use Appropriate Isolation Levels: Transaction isolation levels control the locking behavior and concurrency of your transactions. 
+<br>Avoid Long-Running Cursors: Cursors can hold locks for extended periods, so minimize their use, especially for large datasets. 
+<br>Locks are essential for database concurrency and data integrity.  Understanding lock types, compatibility, and best practices helps you write efficient T-SQL code and prevent common locking issues like blocking and deadlocks. ]]></description><link>SQL-SERVER\13. TRANSACTIONS\3. Working with Locks, Types of locks.html</link><guid isPermaLink="false">SQL-SERVER/13. TRANSACTIONS/3. Working with Locks, Types of locks.md</guid><pubDate>Fri, 04 Oct 2024 17:10:15 GMT</pubDate></item><item><title><![CDATA[TRANSACTIONS]]></title><description><![CDATA[ 
+ <br><a data-tooltip-position="top" aria-label="SQL-SERVER/5. NORMALIZATION/1. Introduction" data-href="SQL-SERVER/5. NORMALIZATION/1. Introduction" href="SQL-SERVER\5. NORMALIZATION\1. Introduction.html" class="internal-link" target="_self" rel="noopener nofollow">1. Introduction</a><br>
+<a data-href="2. Implicit and Explicit Transactions" href="SQL-SERVER\13. TRANSACTIONS\2. Implicit and Explicit Transactions.html" class="internal-link" target="_self" rel="noopener nofollow">2. Implicit and Explicit Transactions</a><br>
+<a data-href="3. Working with Locks, Types of locks" href="SQL-SERVER\13. TRANSACTIONS\3. Working with Locks, Types of locks.html" class="internal-link" target="_self" rel="noopener nofollow">3. Working with Locks, Types of locks</a>]]></description><link>SQL-SERVER\13. TRANSACTIONS\TRANSACTIONS.html</link><guid isPermaLink="false">SQL-SERVER/13. TRANSACTIONS/TRANSACTIONS.md</guid><pubDate>Mon, 23 Dec 2024 16:25:17 GMT</pubDate></item><item><title><![CDATA[1.Generating SQL Script]]></title><description><![CDATA[ 
+ <br>I. Database Backup Script<br>This script backs up the YourDatabaseName database to a disk file. Remember to replace the placeholders!<br>-- **Placeholders to Replace:**
+-- YourDatabaseName:  The name of the database you want to back up.
+-- C:\YourBackupFolder\YourDatabaseName.bak: The full path and filename for the backup file.
+-- Change this path according to your backup location. 
+
+BACKUP DATABASE YourDatabaseName
+TO DISK = 'C:\YourBackupFolder\YourDatabaseName.bak'
+WITH 
+    FORMAT, -- Creates a new backup file (overwrites any existing file with the same name)
+    INIT = 1,  -- Overwrites the media set (for this example, the backup file)
+    NAME = 'Full Database Backup of YourDatabaseName', -- Backup set description
+    SKIP, -- Continue even if some pages cannot be read
+    STATS = 10; -- Show progress every 10 percent
+GO
+<br>Explanation:<br>
+<br>BACKUP DATABASE YourDatabaseName:  Specifies the database to be backed up.
+<br>TO DISK = '... ' : Backs up to a physical disk file.
+<br>FORMAT: Overwrites existing backup files with the same name. If you want to append to an existing backup set, use NOFORMAT.
+<br>INIT = 1: Overwrites the media set. If you are appending backups, use INIT = 0 and specify a different backup file name or location.
+<br>NAME:  Sets a description for the backup set.
+<br>SKIP: Continues the backup even if there are errors reading some pages (for example, due to permission issues).
+<br>STATS = 10:  Displays the backup progress in the Messages tab every 10%.
+<br>II. Database Restore Script<br>This script restores the database from the backup file you created. Again, replace the placeholders!<br>-- **Placeholders to Replace:**
+-- YourDatabaseName:  The name of the database to restore (this could be different if you're restoring to a new database name).
+-- C:\YourBackupFolder\YourDatabaseName.bak: The full path and filename of your backup file.
+
+-- 1. Take the database offline (if it's currently online)
+ALTER DATABASE YourDatabaseName
+SET OFFLINE WITH ROLLBACK IMMEDIATE; 
+
+-- 2. Perform the restore 
+RESTORE DATABASE YourDatabaseName 
+FROM DISK = 'C:\YourBackupFolder\YourDatabaseName.bak' 
+WITH 
+    REPLACE,  -- Overwrites the existing database (if it exists)
+    RECOVERY;  -- Puts the database into a usable state after the restore
+
+-- 3. Bring the database online
+ALTER DATABASE YourDatabaseName
+SET ONLINE; 
+GO 
+<br>Explanation:<br>
+<br>Take Offline: It's usually necessary to take the database offline before restoring. The WITH ROLLBACK IMMEDIATE clause immediately rolls back any uncommitted transactions.
+<br>RESTORE DATABASE: Specifies the database to restore to.
+<br>FROM DISK = '...':  Restores from the specified backup file.
+<br>REPLACE:  Overwrites an existing database with the same name. Use MOVE if you're restoring to a different location on disk.
+<br>RECOVERY:  Puts the database into a consistent and usable state. 
+<br>Bring Online:  Makes the restored database accessible.
+<br>Important Considerations:<br>
+<br>Permissions: Ensure you have the necessary permissions to perform backups and restores.
+<br>Backup Locations: Choose safe and reliable backup locations (network shares, cloud storage). 
+<br>Regular Backups: Establish a regular backup schedule to protect your data.
+<br>Test Restores: Practice restoring backups periodically to ensure they are valid and that your restore process works as expected.
+<br>Differential &amp; Log Backups: For very large databases or frequent updates, explore differential backups and transaction log backups to minimize backup time and data loss.
+]]></description><link>SQL-SERVER\14. BACKUP AND RESTORE\1.Generating SQL Script.html</link><guid isPermaLink="false">SQL-SERVER/14. BACKUP AND RESTORE/1.Generating SQL Script.md</guid><pubDate>Fri, 04 Oct 2024 17:41:58 GMT</pubDate></item><item><title><![CDATA[2. Attaching and detaching of database]]></title><description><![CDATA[ 
+ <br>Attaching and detaching databases in SQL Server is all about managing the physical .mdf (data file) and .ldf (log file) associated with a database.<br>Why Attach and Detach?<br>
+<br>Moving Databases:  Transfer a database from one SQL Server instance to another (e.g., from a development to a production server).
+<br>Offline Backups: Detach a database to create offline backups of its files.
+<br>Space Management:  Free up disk space by detaching databases that are not frequently used.
+<br>I. Attaching a Database<br>
+<br>
+Locate the Database Files:  Make sure you have the .mdf and .ldf files accessible to the SQL Server instance where you want to attach the database. 
+
+<br>
+Use CREATE DATABASE ... FOR ATTACH:
+-- Replace the placeholders!
+CREATE DATABASE YourDatabaseName 
+ON 
+    ( FILENAME = 'C:\Path\To\YourDatabaseName.mdf' ), 
+    ( FILENAME = 'C:\Path\To\YourDatabaseName.ldf' ) 
+FOR ATTACH; 
+GO
+
+
+<br>Replace YourDatabaseName with the desired name for the attached database.
+<br>Replace C:\Path\To\... with the actual file paths for your .mdf and .ldf files.
+
+
+<br>II. Detaching a Database<br>
+<br>
+Use EXEC sp_detach_db:
+-- Replace YourDatabaseName! 
+EXEC sp_detach_db 'YourDatabaseName'; 
+GO 
+
+
+<br>Replace YourDatabaseName with the name of the database you want to detach.
+
+
+<br>Important Points<br>
+<br>Permissions: You need sufficient permissions to attach and detach databases.
+<br>File Paths: SQL Server needs access to the file paths you specify for attaching databases. 
+<br>Data Loss Risk (Detaching):  Make sure you have backups! If you delete the .mdf or .ldf files after detaching a database, you won't be able to recover the data.
+<br>Active Connections: You cannot detach a database that has active connections. 
+
+<br>Use ALTER DATABASE ... SET SINGLE_USER WITH ROLLBACK IMMEDIATE; to disconnect users and roll back any open transactions.
+
+
+<br>Example Scenario<br>Let's say you want to move a database called TestDB from a development server to a production server. Here's a simplified process:<br>Development Server:<br>
+<br>Back up TestDB: Create a full backup on the development server for safety.
+<br>Detach TestDB: Use EXEC sp_detach_db 'TestDB';.
+<br>Copy Files: Copy the TestDB.mdf and TestDB.ldf files to a location accessible to your production server.
+<br>Production Server:<br>
+<br>Attach TestDB: Use the CREATE DATABASE ... FOR ATTACH statement, providing the correct file paths on the production server.
+<br>Additional Notes<br>
+<br>Attaching from Backups: You can also attach databases directly from backup files (.bak) using the RESTORE ... WITH MOVE option. This is useful when the data and log files are within a backup.
+<br>Troubleshooting:  If you encounter issues attaching or detaching, check SQL Server error logs for detailed messages.
+]]></description><link>SQL-SERVER\14. BACKUP AND RESTORE\2. Attaching and detaching of database.html</link><guid isPermaLink="false">SQL-SERVER/14. BACKUP AND RESTORE/2. Attaching and detaching of database.md</guid><pubDate>Fri, 04 Oct 2024 17:45:15 GMT</pubDate></item><item><title><![CDATA[BACKUP AND RESTORE]]></title><description><![CDATA[ 
+ <br><a data-href="1.Generating SQL Script" href="SQL-SERVER\14. BACKUP AND RESTORE\1.Generating SQL Script.html" class="internal-link" target="_self" rel="noopener nofollow">1.Generating SQL Script</a><br>
+<a data-href="2. Attaching and detaching of database" href="SQL-SERVER\14. BACKUP AND RESTORE\2. Attaching and detaching of database.html" class="internal-link" target="_self" rel="noopener nofollow">2. Attaching and detaching of database</a>]]></description><link>SQL-SERVER\14. BACKUP AND RESTORE\BACKUP AND RESTORE.html</link><guid isPermaLink="false">SQL-SERVER/14. BACKUP AND RESTORE/BACKUP AND RESTORE.md</guid><pubDate>Mon, 23 Dec 2024 16:25:46 GMT</pubDate></item><item><title><![CDATA[INDEX]]></title><description><![CDATA[ 
+ <br>
+<br><a data-href="DQL" href="SQL-SERVER\1. DQL\DQL.html" class="internal-link" target="_self" rel="noopener nofollow">DQL</a>
+<br><a data-href="FUNCTIONS" href="SQL-SERVER\2. FUNCTIONS\FUNCTIONS.html" class="internal-link" target="_self" rel="noopener nofollow">FUNCTIONS</a>
+<br><a data-href="JOINS" href="SQL-SERVER\3. JOINS\JOINS.html" class="internal-link" target="_self" rel="noopener nofollow">JOINS</a>
+<br><a data-href="WORKING WITH CONSTRAINTS" href="SQL-SERVER\4. WORKING WITH CONSTRAINTS\WORKING WITH CONSTRAINTS.html" class="internal-link" target="_self" rel="noopener nofollow">WORKING WITH CONSTRAINTS</a>
+<br><a data-href="NORMALIZATION" href="SQL-SERVER\5. NORMALIZATION\NORMALIZATION.html" class="internal-link" target="_self" rel="noopener nofollow">NORMALIZATION</a>
+<br><a data-href="IMPLEMENTING VIEW" href="SQL-SERVER\6. IMPLEMENTING VIEWS\IMPLEMENTING VIEW.html" class="internal-link" target="_self" rel="noopener nofollow">IMPLEMENTING VIEW</a>
+<br><a data-href="STORED PROCEDURE" href="SQL-SERVER\7. STORED PROCEDURE\STORED PROCEDURE.html" class="internal-link" target="_self" rel="noopener nofollow">STORED PROCEDURE</a>
+<br><a data-href="TRIGGERS" href="SQL-SERVER\8. TRIGGERS\TRIGGERS.html" class="internal-link" target="_self" rel="noopener nofollow">TRIGGERS</a>
+<br><a data-href="SQL INDEX" href="SQL-SERVER\9. INDEX\SQL INDEX.html" class="internal-link" target="_self" rel="noopener nofollow">SQL INDEX</a>
+<br><a data-href="DATA CONTROL LANGUAGE (DCL)" href="SQL-SERVER\10. DATA CONTROL LANGUAGE (DCL)\DATA CONTROL LANGUAGE (DCL).html" class="internal-link" target="_self" rel="noopener nofollow">DATA CONTROL LANGUAGE (DCL)</a>
+<br><a data-href="TRANSACT SQL" href="SQL-SERVER\11. TRANSACT SQL\TRANSACT SQL.html" class="internal-link" target="_self" rel="noopener nofollow">TRANSACT SQL</a>
+<br><a data-href="CURSOR" href="SQL-SERVER\12. CURSOR\CURSOR.html" class="internal-link" target="_self" rel="noopener nofollow">CURSOR</a>
+<br><a data-href="TRANSACTIONS" href="SQL-SERVER\13. TRANSACTIONS\TRANSACTIONS.html" class="internal-link" target="_self" rel="noopener nofollow">TRANSACTIONS</a>
+<br><a data-href="BACKUP AND RESTORE" href="SQL-SERVER\14. BACKUP AND RESTORE\BACKUP AND RESTORE.html" class="internal-link" target="_self" rel="noopener nofollow">BACKUP AND RESTORE</a>
+]]></description><link>INDEX.html</link><guid isPermaLink="false">INDEX.md</guid><pubDate>Mon, 23 Dec 2024 16:23:00 GMT</pubDate></item></channel></rss>
